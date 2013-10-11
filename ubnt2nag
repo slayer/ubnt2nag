@@ -47,12 +47,17 @@ class FlyTP2UB
     stdout
   end
 
+  def ccq val
+    val = val.to_i
+    val == 100 ? val : val / 10
+  end
+
   def status_cgi
     stdout = ssh_exec "/usr/www/status.cgi"
     stdout.gsub!('Content-Type: application/json', '')
     h = JSON.load stdout
     logger.debug "Hash: #{h.to_yaml}"
-    puts "OK|'signal: #{h['wireless']['signal']}';;;-100;0'noise'=#{h['wireless']['noise']};;;-100;0'ccq'=#{h['wireless']['ccq']};;100%;30%;'airmaxqual'=75%;;;;'airmaxcap'=71%;;;;"
+    puts "OK|'signal: #{h['wireless']['signal']}';;;-100;0'noise'=#{h['wireless']['noise']};;;-100;0'ccq'=#{ccq h['wireless']['ccq']};;100%;30%;'airmaxqual'=75%;;;;'airmaxcap'=71%;;;;"
   end
 
   def mca_status
@@ -67,7 +72,7 @@ class FlyTP2UB
         h[key] = value
       end
     end
-    puts "OK|'signal: #{h['signal']}';;;-100;0'noise'=#{h['noise']};;;-100;0'ccq'=#{h['ccq']};;100%;30%;'airmaxqual'=75%;;;;'airmaxcap'=71%;;;;"
+    puts "OK|'signal: #{h['signal']}';;;-100;0'noise'=#{h['noise']};;;-100;0'ccq'=#{ccq h['ccq']};;100%;30%;'airmaxqual'=75%;;;;'airmaxcap'=71%;;;;"
   end
 
   def run
