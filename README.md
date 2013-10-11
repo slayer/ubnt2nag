@@ -1,4 +1,8 @@
-flytp2ub
+ubnt2nag
 ========
 
-flytp2ub
+Usage:
+
+				ubnt2nag -h host[:port] -u user -p password -v command
+
+Where command is status_cgi or mca_status
