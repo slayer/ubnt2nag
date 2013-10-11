@@ -15,7 +15,7 @@ class FlyTP2UB
       on 'h', 'host=', 'Hostname'
       on 'u', 'user=', 'Username'
       on 'p', 'password=', 'Password', argument: :optional
-      on 'k', 'key=', 'ssh key', argument: :optional
+      on 'k', 'key=', 'Path to private key', argument: :optional
       on 'v', 'verbose', 'Enable verbose mode', argument: :optional
     end
 
@@ -37,7 +37,10 @@ class FlyTP2UB
     host, port = opts[:host].split(':')
     port ||= 22
     stdout = ""
-    Net::SSH.start(host, opts[:user], port: port, password: opts[:password], logger: logger) do |ssh|
+    params = { port: port, logger: logger }
+    params[:password] = opts[:password] if opts[:password]
+    params[:keys] = [opts.key] if opts[:key]
+    Net::SSH.start(host, opts[:user], params) do |ssh|
       ssh .exec!(cmd) do |channel, stream, data|
         stdout << data if stream == :stdout
       end
