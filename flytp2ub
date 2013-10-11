@@ -1,0 +1,47 @@
+#!/usr/bin/env ruby
+
+require 'net/ssh'
+require 'slop'
+require 'json'
+require 'yaml'
+
+
+opts = Slop.parse do
+  banner "Usage: #{$0} [options]"
+
+  on 'h', 'host=', 'Hostname'
+  on 'u', 'user=', 'Username'
+  on 'p', 'password=', 'Password', argument: :optional
+  on 'k', 'key=', 'ssh key', argument: :optional
+  on 'v', 'verbose', 'Enable verbose mode', argument: :optional
+end
+
+unless opts[:host]
+  puts opts
+  exit
+end
+
+host, port = opts[:host].split(':')
+port ||= 22
+
+
+logger = Logger.new(STDERR)
+logger.level = opts.verbose? ? Logger::DEBUG : Logger::WARN
+
+Net::SSH.start(host, opts[:user], port: port, password: opts[:password], logger: logger) do |ssh|
+
+  cmd = %w[/usr/www/status.cgi]
+
+  # capture only stdout matching a particular pattern
+  stdout = ""
+  ssh.exec!(cmd) do |channel, stream, data|
+    stdout << data if stream == :stdout
+  end
+  stdout.gsub!('Content-Type: application/json', '')
+
+  h = JSON.load stdout
+  logger.debug stdout
+  logger.debug "-" * 50
+
+  puts "OK|'signal: #{h['wireless']['signal']}';;;-100;0'noise'=#{h['wireless']['noise']};;;-100;0'ccq'=#{h['wireless']['ccq']};;100%;30%;'airmaxqual'=75%;;;;'airmaxcap'=71%;;;;"
+end
