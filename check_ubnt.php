@@ -66,7 +66,7 @@ $ds_name[1] = "{$_SIGNAL['NAME']} {$_NOISE['NAME']}";
 $opt[1] = "--vertical-label 'dBm' --title '{$this->MACRO['DISP_HOSTNAME']} / {$this->MACRO['DISP_SERVICEDESC']} Signal' --alt-y-grid ";
 
 #$def[1] .= "DEF:signal={$_SIGNAL['RRDFILE']}:{$_SIGNAL['DS']}:AVERAGE ";
-#$def[1] .= "DEF:noise={$_NOISE['RRDFILE']}:{$_NOISE['DS']}:AVERAGE ";
+$def[1] .= "DEF:noise={$_NOISE['RRDFILE']}:{$_NOISE['DS']}:AVERAGE ";
 
 ## If noise or signal equal 0 then the link was down
 #$def[1] .= "CDEF:signalU=signal,0,EQ,NEGINF,signal,IF ";
