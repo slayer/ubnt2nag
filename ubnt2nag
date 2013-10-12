@@ -6,7 +6,7 @@ require 'json'
 require 'yaml'
 
 
-class FlyTP2UB
+class UBNT2NAG
 
   def opts
     @opts ||= Slop.parse do
@@ -86,5 +86,4 @@ class FlyTP2UB
 end
 
 
-
-FlyTP2UB.new.run
+UBNT2NAG.new.run
