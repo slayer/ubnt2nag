@@ -77,7 +77,7 @@ class UBNT2NAG
         h[key] = value
       end
     end
-    puts "OK|'rxdata':#{h['wlanRxBytes']}c;;;;'txdata':#{h['wlanTxBytes']}c;;;;'signal:#{h['signal']}';;;-100;0'noise'=#{h['noise']};;;-100;0'rxrate'=#{h['wlanRxRate']};;;;'txrate'=#{h['wlanTxRate']};;;;'ccq'=#{ccq h['ccq']}%;;100%;30%;"
+    puts "OK|'rxdata':#{h['wlanRxBytes']}c;;;;'txdata':#{h['wlanTxBytes']}c;;;;'signal':#{h['signal']};;;-100;0'noise'=#{h['noise']};;;-100;0'rxrate'=#{h['wlanRxRate']};;;;'txrate'=#{h['wlanTxRate']};;;;'ccq'=#{ccq h['ccq']}%;;100%;30%;"
   end
 
   def run
