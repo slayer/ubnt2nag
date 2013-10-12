@@ -42,7 +42,7 @@ $_SIGMAX = max ($_SIGNAL['MAX'], $_NOISE['MAX']);
 
 # Define data graph
 $ds_name[0] = "{$_TXDATA['NAME']} {$_RXDATA['NAME']}";
-$opt[0] = "--vertical-label 'Mbps' --title '{$this->MACRO['DISP_HOSTNAME']} / {$this->MACRO['DISP_SERVICEDESC']} Speed' --lower-limit=0 ";
+$opt[0] = "--vertical-label 'Mbps' --title '{$this->MACRO['DISP_HOSTNAME']} / {$this->MACRO['DISP_SERVICEDESC']} Traffic' --lower-limit=0 ";
 
 $def[0]  = "DEF:rxdata={$_RXDATA['RRDFILE']}:{$_RXDATA['DS']}:AVERAGE ";
 $def[0] .= "DEF:txdata={$_TXDATA['RRDFILE']}:{$_TXDATA['DS']}:AVERAGE ";
