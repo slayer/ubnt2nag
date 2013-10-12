@@ -61,13 +61,13 @@ $def[0] .= "GPRINT:txdata:AVERAGE:'%3.1lf Mbps AVG ' ";
 $def[0] .= "GPRINT:txdata:LAST:'%3.1lf Mbps LAST\\n' ";
 
 
-## Define signal graph
-#$ds_name[1] = "{$_SIGNAL['NAME']} {$_NOISE['NAME']}";
-#$opt[1] = "--vertical-label 'dBm' --title '{$this->MACRO['DISP_HOSTNAME']} / {$this->MACRO['DISP_SERVICEDESC']} Signal' --alt-y-grid ";
-#
-#$def[1] .= "DEF:signal={$_SIGNAL['RRDFILE']}:{$_SIGNAL['DS']}:AVERAGE ";
-#$def[1]  = "DEF:noise={$_NOISE['RRDFILE']}:{$_NOISE['DS']}:AVERAGE ";
-#
+# Define signal graph
+$ds_name[1] = "{$_SIGNAL['NAME']} {$_NOISE['NAME']}";
+$opt[1] = "--vertical-label 'dBm' --title '{$this->MACRO['DISP_HOSTNAME']} / {$this->MACRO['DISP_SERVICEDESC']} Signal' --alt-y-grid ";
+
+$def[1] .= "DEF:signal={$_SIGNAL['RRDFILE']}:{$_SIGNAL['DS']}:AVERAGE ";
+$def[1]  = "DEF:noise={$_NOISE['RRDFILE']}:{$_NOISE['DS']}:AVERAGE ";
+
 ## If noise or signal equal 0 then the link was down
 #$def[1] .= "CDEF:signalU=signal,0,EQ,NEGINF,signal,IF ";
 #$def[1] .= "CDEF:noiseU=noise,0,EQ,UNKN,noise,IF ";
@@ -76,20 +76,20 @@ $def[0] .= "GPRINT:txdata:LAST:'%3.1lf Mbps LAST\\n' ";
 #$def[1] .= "CDEF:signalI=signalU,UN,UNKN,NEGINF,IF ";
 #$def[1] .= "CDEF:noiseI=noiseU,UN,UNKN,NEGINF,IF ";
 #
-## Plot values
-#$def[1] .= "LINE1:signalU{$_C_SIGNAL}:'Signal        ' ";
-#$def[1] .= "AREA:signalI{$_C_SIGNAL}:'':STACK ";
-#$def[1] .= "GPRINT:signalU:MIN:'%3.0lf dBm MIN ' ";
-#$def[1] .= "GPRINT:signalU:MAX:'%3.0lf dBm MAX ' ";
-#$def[1] .= "GPRINT:signalU:AVERAGE:'%3.0lf dBm AVG ' ";
-#$def[1] .= "GPRINT:signalU:LAST:'%3.0lf dBm LAST\\n' ";
+# Plot values
+$def[1] .= "LINE1:signalU{$_C_SIGNAL}:'Signal        ' ";
+$def[1] .= "AREA:signalI{$_C_SIGNAL}:'':STACK ";
+$def[1] .= "GPRINT:signalU:MIN:'%3.0lf dBm MIN ' ";
+$def[1] .= "GPRINT:signalU:MAX:'%3.0lf dBm MAX ' ";
+$def[1] .= "GPRINT:signalU:AVERAGE:'%3.0lf dBm AVG ' ";
+$def[1] .= "GPRINT:signalU:LAST:'%3.0lf dBm LAST\\n' ";
 #
-#$def[1] .= "LINE1:noiseU{$_C_NOISE}:'Noise         ' ";
-#$def[1] .= "AREA:noiseI{$_C_NOISE}:'':STACK ";
-#$def[1] .= "GPRINT:noiseU:MIN:'%3.0lf dBm MIN ' ";
-#$def[1] .= "GPRINT:noiseU:MAX:'%3.0lf dBm MAX ' ";
-#$def[1] .= "GPRINT:noiseU:AVERAGE:'%3.0lf dBm AVG ' ";
-#$def[1] .= "GPRINT:noiseU:LAST:'%3.0lf dBm LAST\\n' ";
+$def[1] .= "LINE1:noiseU{$_C_NOISE}:'Noise         ' ";
+$def[1] .= "AREA:noiseI{$_C_NOISE}:'':STACK ";
+$def[1] .= "GPRINT:noiseU:MIN:'%3.0lf dBm MIN ' ";
+$def[1] .= "GPRINT:noiseU:MAX:'%3.0lf dBm MAX ' ";
+$def[1] .= "GPRINT:noiseU:AVERAGE:'%3.0lf dBm AVG ' ";
+$def[1] .= "GPRINT:noiseU:LAST:'%3.0lf dBm LAST\\n' ";
 #
 #$def[1] .= "LINE1:signalU{$_C_LINE}:'' ";
 #$def[1] .= "LINE1:noiseU{$_C_LINE} ";
