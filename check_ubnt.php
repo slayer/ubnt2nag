@@ -1,4 +1,15 @@
 <?php
+# coding: utf-8
+#
+# Ubiquiti pnp4nagios template
+#
+# By Zig Fisher
+# flyrouter@gmail.com
+# http://blog.flyrouter.net
+# Licence GPLv2
+# Version 0.1
+
+
 # Colors
 $_C_WARNRULE  = '#FFFF00';
 $_C_CRITRULE  = '#FF0000';
