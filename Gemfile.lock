@@ -1,0 +1,14 @@
+GEM
+  remote: http://rubygems.org/
+  specs:
+    json (1.8.0)
+    net-ssh (2.7.0)
+    slop (3.4.6)
+
+PLATFORMS
+  ruby
+
+DEPENDENCIES
+  json
+  net-ssh
+  slop

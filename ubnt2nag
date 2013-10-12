@@ -1,5 +1,7 @@
 #!/usr/bin/env ruby
 
+require 'rubygems'
+require 'bundler/setup'
 require 'net/ssh'
 require 'slop'
 require 'json'
@@ -10,7 +12,7 @@ class FlyTP2UB
 
   def opts
     @opts ||= Slop.parse do
-      banner "Usage: #{$0} [options]"
+      banner "Usage: #{$0} [options] command\n  commands: status_cgi, mca_status"
 
       on 'h', 'host=', 'Hostname'
       on 'u', 'user=', 'Username'
@@ -39,7 +41,7 @@ class FlyTP2UB
     stdout = ""
     params = { port: port, logger: logger }
     params[:password] = opts[:password] if opts[:password]
-    params[:keys] = [opts.key] if opts[:key]
+    params[:keys] = [opts[:key]] if opts[:key]
     Net::SSH.start(host, opts[:user], params) do |ssh|
       ssh .exec!(cmd) do |channel, stream, data|
         stdout << data if stream == :stdout
@@ -80,7 +82,11 @@ class FlyTP2UB
 
   def run
     cmd = ARGV[-1]
-    self.send(cmd)
+    if self.respond_to?(cmd)
+      self.send(cmd)
+    else
+      puts opts.help
+    end
   end
 
 end
