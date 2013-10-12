@@ -39,38 +39,42 @@ $_CCQ       = $this->DS[6];
 $_SIGMIN = min ($_SIGNAL['MIN'], $_NOISE['MIN']);
 $_SIGMAX = max ($_SIGNAL['MAX'], $_NOISE['MAX']);
 
-# Define signal graph
-$ds_name[0] = "{$_SIGNAL['NAME']} {$_NOISE['NAME']}";
-$opt[0] = "--vertical-label 'dBm' --title '{$this->MACRO['DISP_HOSTNAME']} / {$this->MACRO['DISP_SERVICEDESC']} Signal' --alt-y-grid ";
 
-$def[0] .= "DEF:signal={$_SIGNAL['RRDFILE']}:{$_SIGNAL['DS']}:AVERAGE ";
-$def[0]  = "DEF:noise={$_NOISE['RRDFILE']}:{$_NOISE['DS']}:AVERAGE ";
 
-# If noise or signal equal 0 then the link was down
-$def[0] .= "CDEF:signalU=signal,0,EQ,NEGINF,signal,IF ";
-$def[0] .= "CDEF:noiseU=noise,0,EQ,UNKN,noise,IF ";
+## Define signal graph
+#$ds_name[0] = "{$_SIGNAL['NAME']} {$_NOISE['NAME']}";
+#$opt[0] = "--vertical-label 'dBm' --title '{$this->MACRO['DISP_HOSTNAME']} / {$this->MACRO['DISP_SERVICEDESC']} Signal' --alt-y-grid ";
+#
+#$def[0] .= "DEF:signal={$_SIGNAL['RRDFILE']}:{$_SIGNAL['DS']}:AVERAGE ";
+#$def[0]  = "DEF:noise={$_NOISE['RRDFILE']}:{$_NOISE['DS']}:AVERAGE ";
+#
+## If noise or signal equal 0 then the link was down
+#$def[0] .= "CDEF:signalU=signal,0,EQ,NEGINF,signal,IF ";
+#$def[0] .= "CDEF:noiseU=noise,0,EQ,UNKN,noise,IF ";
+#
+## Drop values to -infinity for filling graph
+#$def[0] .= "CDEF:signalI=signalU,UN,UNKN,NEGINF,IF ";
+#$def[0] .= "CDEF:noiseI=noiseU,UN,UNKN,NEGINF,IF ";
+#
+## Plot values
+#$def[0] .= "LINE1:signalU{$_C_SIGNAL}:'Signal        ' ";
+#$def[0] .= "AREA:signalI{$_C_SIGNAL}:'':STACK ";
+#$def[0] .= "GPRINT:signalU:MIN:'%3.0lf dBm MIN ' ";
+#$def[0] .= "GPRINT:signalU:MAX:'%3.0lf dBm MAX ' ";
+#$def[0] .= "GPRINT:signalU:AVERAGE:'%3.0lf dBm AVG ' ";
+#$def[0] .= "GPRINT:signalU:LAST:'%3.0lf dBm LAST\\n' ";
+#
+#$def[0] .= "LINE1:noiseU{$_C_NOISE}:'Noise         ' ";
+#$def[0] .= "AREA:noiseI{$_C_NOISE}:'':STACK ";
+#$def[0] .= "GPRINT:noiseU:MIN:'%3.0lf dBm MIN ' ";
+#$def[0] .= "GPRINT:noiseU:MAX:'%3.0lf dBm MAX ' ";
+#$def[0] .= "GPRINT:noiseU:AVERAGE:'%3.0lf dBm AVG ' ";
+#$def[0] .= "GPRINT:noiseU:LAST:'%3.0lf dBm LAST\\n' ";
+#
+#$def[0] .= "LINE1:signalU{$_C_LINE}:'' ";
+#$def[0] .= "LINE1:noiseU{$_C_LINE} ";
 
-# Drop values to -infinity for filling graph
-$def[0] .= "CDEF:signalI=signalU,UN,UNKN,NEGINF,IF ";
-$def[0] .= "CDEF:noiseI=noiseU,UN,UNKN,NEGINF,IF ";
 
-# Plot values
-$def[0] .= "LINE1:signalU{$_C_SIGNAL}:'Signal        ' ";
-$def[0] .= "AREA:signalI{$_C_SIGNAL}:'':STACK ";
-$def[0] .= "GPRINT:signalU:MIN:'%3.0lf dBm MIN ' ";
-$def[0] .= "GPRINT:signalU:MAX:'%3.0lf dBm MAX ' ";
-$def[0] .= "GPRINT:signalU:AVERAGE:'%3.0lf dBm AVG ' ";
-$def[0] .= "GPRINT:signalU:LAST:'%3.0lf dBm LAST\\n' ";
-
-$def[0] .= "LINE1:noiseU{$_C_NOISE}:'Noise         ' ";
-$def[0] .= "AREA:noiseI{$_C_NOISE}:'':STACK ";
-$def[0] .= "GPRINT:noiseU:MIN:'%3.0lf dBm MIN ' ";
-$def[0] .= "GPRINT:noiseU:MAX:'%3.0lf dBm MAX ' ";
-$def[0] .= "GPRINT:noiseU:AVERAGE:'%3.0lf dBm AVG ' ";
-$def[0] .= "GPRINT:noiseU:LAST:'%3.0lf dBm LAST\\n' ";
-
-$def[0] .= "LINE1:signalU{$_C_LINE}:'' ";
-$def[0] .= "LINE1:noiseU{$_C_LINE} ";
 
 # Define connection graph
 #$ds_name[1] = "{$_CCQ['NAME']} {$_AQUALITY['NAME']} {$_ACAPACITY['NAME']}";
@@ -98,6 +102,8 @@ $def[1] .= "GPRINT:ccq:LAST:'%3.0lf%% LAST\\n' ";
 #$def[1] .= "GPRINT:acapacity:MAX:'%3.0lf%% MAX ' ";
 #$def[1] .= "GPRINT:acapacity:AVERAGE:'%3.0lf%% AVG ' ";
 #$def[1] .= "GPRINT:acapacity:LAST:'%3.0lf%% LAST\\n' ";
+
+
 
 # Define rate graph
 $ds_name[2] = "{$_TXRATE['NAME']} {$_RXRATE['NAME']}";
