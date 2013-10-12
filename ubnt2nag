@@ -77,7 +77,7 @@ class UBNT2NAG
         h[key] = value
       end
     end
-    puts "UBNT OK: NAME=#{h['deviceName']}, MAC=#{h['deviceId']}, ESSID=#{h['essid']}, FREQ=#{h['freq']}, DEVID=#{h['platform']}, UPTIME=#{h['uptime']}, SIG=#{h['signal']}, CCQ=#{ccq h['ccq']}, RATE=#{h['wlanRxRate']}/#{h['wlanTxRate']}, WCON=#{h['wlanConnections']}, LAVG=#{h['loadavg']}, LS=#{h['lanSpeed']}, FW=#{h['firmwareVersion']}, CFGCRC=#{h['cfgCrc']} | 'rxdata'=#{h['wlanRxBytes']}c;;;;'txdata'=#{h['wlanTxBytes']}c;;;;'signal'=#{h['signal']};-78;-83;-100;0'noise'=#{h['noise']};-91;-89;-100;0'rxrate'=#{h['wlanRxRate']};30;10;0;270'txrate'=#{h['wlanTxRate']};30;10;0;270'ccq'=#{ccq h['ccq']}%;90;85;;'wlanconn'=#{h['wlanConnections']};;;;'loadavg'=#{h['loadavg']};;;;"
+    puts "UBNT OK: NAME=#{h['deviceName']}, MAC=#{h['deviceId']}, ESSID=#{h['essid']}, FREQ=#{h['freq']}, DEVID=#{h['platform']}, UPTIME=#{h['uptime']}, SIG=#{h['signal']}, CCQ=#{ccq h['ccq']}, RATE=#{h['wlanRxRate']}/#{h['wlanTxRate']}, WCON=#{h['wlanConnections']}, LAVG=#{h['loadavg']}, LS=#{h['lanSpeed']}, FW=#{h['firmwareVersion']}, CFGCRC=#{h['cfgCrc']} | 'rxdata'=#{h['wlanRxBytes']}c;;;;'txdata'=#{h['wlanTxBytes']}c;;;;'signal'=#{h['signal']};-78;-83;-100;0'noise'=#{h['noise']};-91;-89;-100;0'rxrate'=#{h['wlanRxRate']};30;10;0;270'txrate'=#{h['wlanTxRate']};30;10;0;270'ccq'=#{ccq h['ccq']}%;90;85;;'wcon'=#{h['wlanConnections']};20;25;0;50'lavg'=#{h['loadavg']};5;10;0;30"
   end
 
   def run
