@@ -143,5 +143,4 @@ $def[3] .= "GPRINT:txdata:MAX:'%3.1lf Mbps MAX ' ";
 $def[3] .= "GPRINT:txdata:AVERAGE:'%3.1lf Mbps AVG ' ";
 $def[3] .= "GPRINT:txdata:LAST:'%3.1lf Mbps LAST\\n' ";
 
-
 ?>
