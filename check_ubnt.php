@@ -61,11 +61,11 @@ $def[0] .= "GPRINT:txdata:LAST:'%3.1lf Mbps LAST\\n' ";
 
 
 # Define signal graph
-$ds_name[0] = "{$_SIGNAL['NAME']} {$_NOISE['NAME']}";
-$opt[0] = "--vertical-label 'dBm' --title '{$this->MACRO['DISP_HOSTNAME']} / {$this->MACRO['DISP_SERVICEDESC']} Signal' --lower-limit=0 ";
+$ds_name[1] = "{$_SIGNAL['NAME']} {$_NOISE['NAME']}";
+$opt[1] = "--vertical-label 'dBm' --title '{$this->MACRO['DISP_HOSTNAME']} / {$this->MACRO['DISP_SERVICEDESC']} Signal' --lower-limit=0 ";
 
-$def[0]  = "DEF:signal={$_SIGNAL['RRDFILE']}:{$_SIGNAL['DS']}:AVERAGE ";
-$def[0] .= "DEF:noise={$_NOISE['RRDFILE']}:{$_NOISE['DS']}:AVERAGE ";
+$def[1]  = "DEF:signal={$_SIGNAL['RRDFILE']}:{$_SIGNAL['DS']}:AVERAGE ";
+$def[1] .= "DEF:noise={$_NOISE['RRDFILE']}:{$_NOISE['DS']}:AVERAGE ";
 
 #$ds_name[1] = "{$_SIGNAL['NAME']} {$_NOISE['NAME']}";
 #$opt[1] = "--vertical-label 'dBm' --title '{$this->MACRO['DISP_HOSTNAME']} / {$this->MACRO['DISP_SERVICEDESC']} Signal' --alt-y-grid ";
