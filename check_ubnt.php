@@ -62,16 +62,10 @@ $def[0] .= "GPRINT:txdata:LAST:'%3.1lf Mbps LAST\\n' ";
 
 # Define signal graph
 $ds_name[1] = "{$_SIGNAL['NAME']} {$_NOISE['NAME']}";
-$opt[1] = "--vertical-label 'dBm' --title '{$this->MACRO['DISP_HOSTNAME']} / {$this->MACRO['DISP_SERVICEDESC']} Signal' --lower-limit=0 ";
+$opt[1] = "--vertical-label 'dBm' --title '{$this->MACRO['DISP_HOSTNAME']} / {$this->MACRO['DISP_SERVICEDESC']} Signal' --alt-y-grid ";
 
 $def[1]  = "DEF:signal={$_SIGNAL['RRDFILE']}:{$_SIGNAL['DS']}:AVERAGE ";
 $def[1] .= "DEF:noise={$_NOISE['RRDFILE']}:{$_NOISE['DS']}:AVERAGE ";
-
-#$ds_name[1] = "{$_SIGNAL['NAME']} {$_NOISE['NAME']}";
-#$opt[1] = "--vertical-label 'dBm' --title '{$this->MACRO['DISP_HOSTNAME']} / {$this->MACRO['DISP_SERVICEDESC']} Signal' --alt-y-grid ";
-
-#$def[1] .= "DEF:signal={$_SIGNAL['RRDFILE']}:{$_SIGNAL['DS']}:AVERAGE ";
-#$def[1] .= "DEF:noise={$_NOISE['RRDFILE']}:{$_NOISE['DS']}:AVERAGE ";
 
 ## If noise or signal equal 0 then the link was down
 #$def[1] .= "CDEF:signalU=signal,0,EQ,NEGINF,signal,IF ";
