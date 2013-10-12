@@ -16,16 +16,19 @@ Install complex
 	cd /var/lib/nagios/github
 	git clone https://github.com/slayer/ubnt2nag.git
 	ln -sf /var/lib/nagios/github/ubnt2nag/ubnt2nag /etc/nagios3/script/ubnt2nag
-	ln -sf /var/lib/nagios/github/ubnt2nag/check_ubnt_graph.php /usr/share/pnp4nagios/html/templates.dist/check_ubnt_graph.php
+	ln -sf /var/lib/nagios/github/ubnt2nag/check_ubnt.php /usr/share/pnp4nagios/html/templates.dist/check_ubnt.php
 
 Todo notes
 ==========
 
 	returnValues = { 'OK' : 0, 'WARNING' : 1, 'CRITICAL' : 2, 'UNKNOWN' : 3 }
-	При отсутствии связи, писать вместо "OK |..." "CRITICAL | No connect" и выходить с кодом ошибки 2
-	
+	Если все хорошо, данные получены, писать "OK | ..." и выходить с кодом ошибки 0
+	При отсутствии связи, писать вместо "OK | ..." - "CRITICAL | No connect" и выходить с кодом ошибки 2
+	Если ошибка в передаче параметров командной строки - писать "UNKNOWN | ..." и выходить с кодом ошибки 3
+
+
 	description="Nagios plugin for UBNT devices"
-	
+
 	# Data sources
 	$_RXDATA    = $this->DS[0];
 	$_TXDATA    = $this->DS[1];
