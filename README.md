@@ -28,3 +28,8 @@ or
 	#
 	cd /usr/share/pnp4nagios/html/templates.dist
 	ln -sf /var/lib/nagios/github/ubnt2nag/check_ubnt_graph.php check_ubnt_graph.php
+
+Todo notes
+==========
+
+	returnValues = { 'OK' : 0, 'WARNING' : 1, 'CRITICAL' : 2, 'UNKNOWN' : 3 }

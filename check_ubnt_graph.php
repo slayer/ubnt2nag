@@ -4,25 +4,25 @@ $_C_WARNRULE  = '#FFFF00';
 $_C_CRITRULE  = '#FF0000';
 $_C_LINE      = '#000000';
 $_C_SIGNAL    = '#256aef';
-$_C_SIGNAL0   = '#ff00ff';
-$_C_SIGNAL1   = '#00ff00';
 $_C_NOISE     = '#a00000';
 $_C_CCQ       = '#000000';
 $_C_AQUALITY  = '#ff00ff';
 $_C_ACAPACITY = '#000099';
-#$_C_RXRATE    = '#ff00ff';
-#$_C_TXRATE    = '#000099';
+$_C_RXRATE    = '#ff00ff';
+$_C_TXRATE    = '#000099';
+$_C_RXDATA    = '#ff00ff';
+$_C_TXDATA    = '#00ff00';
 
 # Data sources
-$_SIGNAL    = $this->DS[0];
-$_SIGNAL0   = $this->DS[1];
-$_SIGNAL1   = $this->DS[2];
+$_RXDATA    = $this->DS[0];
+$_TXDATA    = $this->DS[1];
+$_SIGNAL    = $this->DS[2];
 $_NOISE     = $this->DS[3];
 $_CCQ       = $this->DS[4];
 $_AQUALITY  = $this->DS[5];
 $_ACAPACITY = $this->DS[6];
-#$_TXRATE    = $this->DS[7];
-#$_RXRATE    = $this->DS[8];
+$_TXRATE    = $this->DS[7];
+$_RXRATE    = $this->DS[8];
 
 # Calculations
 $_SIGMIN = min ($_SIGNAL['MIN'], $_SIGNAL0['MIN'], $_SIGNAL1['MIN'], $_NOISE['MIN']);
@@ -106,21 +106,41 @@ $def[1] .= "GPRINT:acapacity:AVERAGE:'%3.0lf%% AVG ' ";
 $def[1] .= "GPRINT:acapacity:LAST:'%3.0lf%% LAST\\n' ";
 
 # Define rate graph
-#$ds_name[2] = "{$_TXRATE['NAME']} {$_RXRATE['NAME']}";
-#$opt[2] = "--vertical-label 'Mbps' --title '{$this->MACRO['DISP_HOSTNAME']} / {$this->MACRO['DISP_SERVICEDESC']} Rate' --lower-limit=0 ";
+$ds_name[2] = "{$_TXRATE['NAME']} {$_RXRATE['NAME']}";
+$opt[2] = "--vertical-label 'Mbps' --title '{$this->MACRO['DISP_HOSTNAME']} / {$this->MACRO['DISP_SERVICEDESC']} Rate' --lower-limit=0 ";
 
-#$def[2]  = "DEF:rxrate={$_RXRATE['RRDFILE']}:{$_RXRATE['DS']}:AVERAGE ";
-#$def[2] .= "DEF:txrate={$_TXRATE['RRDFILE']}:{$_TXRATE['DS']}:AVERAGE ";
+$def[2]  = "DEF:rxrate={$_RXRATE['RRDFILE']}:{$_RXRATE['DS']}:AVERAGE ";
+$def[2] .= "DEF:txrate={$_TXRATE['RRDFILE']}:{$_TXRATE['DS']}:AVERAGE ";
 
-#$def[2] .= "LINE1:rxrate{$_C_RXRATE}:'Rx Rate' ";
-#$def[2] .= "GPRINT:rxrate:MIN:'%3.1lf Mbps MIN ' ";
-#$def[2] .= "GPRINT:rxrate:MAX:'%3.1lf Mbps MAX ' ";
-#$def[2] .= "GPRINT:rxrate:AVERAGE:'%3.1lf Mbps AVG ' ";
-#$def[2] .= "GPRINT:rxrate:LAST:'%3.1lf Mbps LAST\\n' ";
+$def[2] .= "LINE1:rxrate{$_C_RXRATE}:'Rx Rate' ";
+$def[2] .= "GPRINT:rxrate:MIN:'%3.1lf Mbps MIN ' ";
+$def[2] .= "GPRINT:rxrate:MAX:'%3.1lf Mbps MAX ' ";
+$def[2] .= "GPRINT:rxrate:AVERAGE:'%3.1lf Mbps AVG ' ";
+$def[2] .= "GPRINT:rxrate:LAST:'%3.1lf Mbps LAST\\n' ";
 
-#$def[2] .= "LINE1:txrate{$_C_TXRATE}:'Tx Rate' ";
-#$def[2] .= "GPRINT:txrate:MIN:'%3.1lf Mbps MIN ' ";
-#$def[2] .= "GPRINT:txrate:MAX:'%3.1lf Mbps MAX ' ";
-#$def[2] .= "GPRINT:txrate:AVERAGE:'%3.1lf Mbps AVG ' ";
-#$def[2] .= "GPRINT:txrate:LAST:'%3.1lf Mbps LAST\\n' ";
+$def[2] .= "LINE1:txrate{$_C_TXRATE}:'Tx Rate' ";
+$def[2] .= "GPRINT:txrate:MIN:'%3.1lf Mbps MIN ' ";
+$def[2] .= "GPRINT:txrate:MAX:'%3.1lf Mbps MAX ' ";
+$def[2] .= "GPRINT:txrate:AVERAGE:'%3.1lf Mbps AVG ' ";
+$def[2] .= "GPRINT:txrate:LAST:'%3.1lf Mbps LAST\\n' ";
+
+# Define data graph
+$ds_name[3] = "{$_TXDATA['NAME']} {$_RXDATA['NAME']}";
+$opt[3] = "--vertical-label 'Mbps' --title '{$this->MACRO['DISP_HOSTNAME']} / {$this->MACRO['DISP_SERVICEDESC']} Speed' --lower-limit=0 ";
+
+$def[3]  = "DEF:rxdata={$_RXDATA['RRDFILE']}:{$_RXDATA['DS']}:AVERAGE ";
+$def[3] .= "DEF:txdata={$_TXDATA['RRDFILE']}:{$_TXDATA['DS']}:AVERAGE ";
+
+$def[3] .= "LINE1:rxdata{$_C_RXDATA}:'Rx Data' ";
+$def[3] .= "GPRINT:rxdata:MIN:'%3.1lf Mbps MIN ' ";
+$def[3] .= "GPRINT:rxdata:MAX:'%3.1lf Mbps MAX ' ";
+$def[3] .= "GPRINT:rxdata:AVERAGE:'%3.1lf Mbps AVG ' ";
+$def[3] .= "GPRINT:rxdata:LAST:'%3.1lf Mbps LAST\\n' ";
+
+$def[3] .= "LINE1:txdata{$_C_TXDATA}:'Tx Data' ";
+$def[3] .= "GPRINT:txdata:MIN:'%3.1lf Mbps MIN ' ";
+$def[3] .= "GPRINT:txdata:MAX:'%3.1lf Mbps MAX ' ";
+$def[3] .= "GPRINT:txdata:AVERAGE:'%3.1lf Mbps AVG ' ";
+$def[3] .= "GPRINT:txdata:LAST:'%3.1lf Mbps LAST\\n' ";
+
 ?>
