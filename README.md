@@ -22,6 +22,7 @@ Todo notes
 ==========
 
 	returnValues = { 'OK' : 0, 'WARNING' : 1, 'CRITICAL' : 2, 'UNKNOWN' : 3 }
+	При отсутствии связи, писать вместо "OK |..." "CRITICAL | No connect" и выходить с кодом ошибки 2
 	
 	description="Nagios plugin for UBNT devices"
 	
