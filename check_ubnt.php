@@ -32,8 +32,10 @@ $_NOISE     = $this->DS[3];
 $_RXRATE    = $this->DS[4];
 $_TXRATE    = $this->DS[5];
 $_CCQ       = $this->DS[6];
-#$_AQUALITY  = $this->DS[7];
-#$_ACAPACITY = $this->DS[8];
+$_WCON      = $this->DS[7];
+$_LAVG      = $this->DS[8];
+#$_AQUALITY  = $this->DS[9];
+#$_ACAPACITY = $this->DS[10];
 
 # Calculations
 $_SIGMIN = min ($_SIGNAL['MIN'], $_NOISE['MIN']);
@@ -140,5 +142,25 @@ $def[3] .= "GPRINT:txrate:MIN:'%3.1lf Mbps MIN ' ";
 $def[3] .= "GPRINT:txrate:MAX:'%3.1lf Mbps MAX ' ";
 $def[3] .= "GPRINT:txrate:AVERAGE:'%3.1lf Mbps AVG ' ";
 $def[3] .= "GPRINT:txrate:LAST:'%3.1lf Mbps LAST\\n' ";
+
+
+# Define data load
+$ds_name[4] = "{$_WCON['NAME']} {$_LAVG['NAME']}";
+$opt[4] = "--vertical-label 'Ps' --title '{$this->MACRO['DISP_HOSTNAME']} / {$this->MACRO['DISP_SERVICEDESC']} Usage' --lower-limit=0 ";
+
+$def[4]  = "DEF:wcon={$_WCON['RRDFILE']}:{$_WCON['DS']}:AVERAGE ";
+$def[4] .= "DEF:lavg={$_LAVG['RRDFILE']}:{$_LAVG['DS']}:AVERAGE ";
+
+$def[4] .= "LINE1:wcon{$_C_RXDATA}:'Users Connected' ";
+$def[4] .= "GPRINT:wcon:MIN:'%3.1lf Users MIN ' ";
+$def[4] .= "GPRINT:wcon:MAX:'%3.1lf Users MAX ' ";
+$def[4] .= "GPRINT:wcon:AVERAGE:'%3.1lf Users AVG ' ";
+$def[4] .= "GPRINT:wcon:LAST:'%3.1lf Users LAST\\n' ";
+
+$def[4] .= "LINE1:lavg{$_C_TXDATA}:'Load CPU' ";
+$def[4] .= "GPRINT:lavg:MIN:'%3.1lf Load MIN ' ";
+$def[4] .= "GPRINT:lavg:MAX:'%3.1lf Load MAX ' ";
+$def[4] .= "GPRINT:lavg:AVERAGE:'%3.1lf Load AVG ' ";
+$def[4] .= "GPRINT:lavg:LAST:'%3.1lf Load LAST\\n' ";
 
 ?>
