@@ -1,1 +1,95 @@
-init
+#!/usr/bin/env ruby
+
+require 'rubygems'
+require 'bundler/setup'
+require 'net/ssh'
+require 'slop'
+require 'json'
+require 'yaml'
+
+
+class UBNT2NAG
+
+  def opts
+    @opts ||= Slop.parse do
+      banner "Usage: #{$0} [options] command\n  commands: status_cgi, mca_status"
+
+      on 'h', 'host=', 'Hostname'
+      on 'u', 'user=', 'Username'
+      on 'p', 'password=', 'Password', argument: :optional
+      on 'k', 'key=', 'Path to private key', argument: :optional
+      on 'v', 'verbose', 'Enable verbose mode', argument: :optional
+    end
+
+    unless @opts[:host]
+      puts @opts
+      exit
+    end
+    @opts
+  end
+
+  def logger
+    @logger ||= Logger.new(STDERR)
+    @logger.level = opts.verbose? ? Logger::DEBUG : Logger::WARN
+    @logger
+  end
+
+
+  def ssh_exec cmd
+    host, port = opts[:host].split(':')
+    port ||= 22
+    stdout = ""
+    params = { port: port, logger: logger }
+    params[:password] = opts[:password] if opts[:password]
+    params[:keys] = [opts[:key]] if opts[:key]
+    Net::SSH.start(host, opts[:user], params) do |ssh|
+      ssh .exec!(cmd) do |channel, stream, data|
+        stdout << data if stream == :stdout
+      end
+    end
+    logger.debug stdout
+    logger.debug "-" * 50
+    stdout
+  end
+
+  def ccq val
+    val = val.to_i
+    val == 100 ? val : val / 10
+  end
+
+  def status_cgi
+    stdout = ssh_exec "/usr/www/status.cgi"
+    stdout.gsub!('Content-Type: application/json', '')
+    h = JSON.load stdout
+    logger.debug "Hash: #{h.to_yaml}"
+    puts "OK|'signal: #{h['wireless']['signal']}';;;-100;0'noise'=#{h['wireless']['noise']};;;-100;0'ccq'=#{ccq h['wireless']['ccq']};;100%;30%;'airmaxqual'=75%;;;;'airmaxcap'=71%;;;;"
+  end
+
+  def mca_status
+    stdout = ssh_exec "/usr/sbin/mca-status"
+    lines = stdout.split("\n")
+    h = {}
+    lines.each do |line|
+      line.chomp!
+      next if line.empty?
+      line.split(',').each do |kv|
+        key, value = kv.split '='
+        h[key] = value
+      end
+    end
+    puts "OK|'signal: #{h['signal']}';;;-100;0'noise'=#{h['noise']};;;-100;0'ccq'=#{ccq h['ccq']};;100%;30%;'airmaxqual'=75%;;;;'airmaxcap'=71%;;;;"
+  end
+
+  def run
+    cmd = ARGV[-1]
+    if self.respond_to?(cmd)
+      self.send(cmd)
+    else
+      puts opts.help
+    end
+  end
+
+end
+
+
+UBNT2NAG.new.run
