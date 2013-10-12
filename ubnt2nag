@@ -77,7 +77,7 @@ class UBNT2NAG
         h[key] = value
       end
     end
-    puts "UBNT OK: rxdata=#{h['wlanRxBytes']},txdata=#{h['wlanTxBytes']},signal=#{h['signal']},noise=#{h['noise']},rxrate=#{h['wlanRxRate']},txrate=#{h['wlanTxRate']},ccq=#{ccq h['ccq']},wlanconn=#{h['wlanConnections']},loadavg=#{h['loadavg']},devname=#{h['deviceName']},mac=#{h['deviceId']},essid=#{h['essid']},platform=#{h['platform']},uptime=#{h['uptime']},freq=#{h['freq']},lanspeed=#{h['lanSpeed']},firmware=#{h['firmwareVersion']},cfgcrc=#{h['cfgCrc']} | 'rxdata'=#{h['wlanRxBytes']}c;;;;'txdata'=#{h['wlanTxBytes']}c;;;;'signal'=#{h['signal']};-78;-83;-100;0'noise'=#{h['noise']};-91;-89;-100;0'rxrate'=#{h['wlanRxRate']};30;10;0;270'txrate'=#{h['wlanTxRate']};30;10;0;270'ccq'=#{ccq h['ccq']}%;90;85;;"
+    puts "UBNT OK: devname=#{h['deviceName']},mac=#{h['deviceId']},essid=#{h['essid']},freq=#{h['freq']},platform=#{h['platform']},uptime=#{h['uptime']},signal=#{h['signal']},ccq=#{ccq h['ccq']},rate=#{h['wlanRxRate']}/#{h['wlanTxRate']},wlanconn=#{h['wlanConnections']},loadavg=#{h['loadavg']},lanspeed=#{h['lanSpeed']},firmware=#{h['firmwareVersion']},cfgcrc=#{h['cfgCrc']} | 'rxdata'=#{h['wlanRxBytes']}c;;;;'txdata'=#{h['wlanTxBytes']}c;;;;'signal'=#{h['signal']};-78;-83;-100;0'noise'=#{h['noise']};-91;-89;-100;0'rxrate'=#{h['wlanRxRate']};30;10;0;270'txrate'=#{h['wlanTxRate']};30;10;0;270'ccq'=#{ccq h['ccq']}%;90;85;;'wlanconn'=#{h['wlanConnections']};;;;'loadavg'=#{h['loadavg']};;;;"
   end
 
   def run
