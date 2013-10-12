@@ -77,8 +77,8 @@ class UBNT2NAG
         h[key] = value
       end
     end
-    #puts "OK rxdata=#{h['wlanRxBytes']},txdata=#{h['wlanTxBytes']},signal=#{h['signal']},noise=#{h['noise']},rxrate=#{h['wlanRxRate']},txrate=#{h['wlanTxRate']},ccq=#{ccq h['ccq']} | 'rxdata'=#{h['wlanRxBytes']}c;;;;'txdata'=#{h['wlanTxBytes']}c;;;;'signal'=#{h['signal']};;;-100;0'noise'=#{h['noise']};;;-100;0'rxrate'=#{h['wlanRxRate']};;;0;270'txrate'=#{h['wlanTxRate']};;;0;270'ccq'=#{ccq h['ccq']}%;;;30%;100%"
-    puts "OK #{h['wlanRxBytes']} #{h['wlanTxBytes']} #{h['signal']} #{h['noise']} | 'rxdata'=#{h['wlanRxBytes']}c;;;;'txdata'=#{h['wlanTxBytes']}c;;;;'signal'=#{h['signal']};;;-100;0'noise'=#{h['noise']};;;-100;0"
+    puts "OK rxdata=#{h['wlanRxBytes']},txdata=#{h['wlanTxBytes']},signal=#{h['signal']},noise=#{h['noise']},rxrate=#{h['wlanRxRate']},txrate=#{h['wlanTxRate']},ccq=#{ccq h['ccq']} | 'rxdata'=#{h['wlanRxBytes']}c;;;;'txdata'=#{h['wlanTxBytes']}c;;;;'signal'=#{h['signal']};;;-100;0'noise'=#{h['noise']};;;-100;0'rxrate'=#{h['wlanRxRate']};;;0;270'txrate'=#{h['wlanTxRate']};;;0;270'ccq'=#{ccq h['ccq']}%;;;30%;100%"
+    #puts "OK #{h['wlanRxBytes']} #{h['wlanTxBytes']} #{h['signal']} #{h['noise']} | 'rxdata'=#{h['wlanRxBytes']}c;;;;'txdata'=#{h['wlanTxBytes']}c;;;;'signal'=#{h['signal']};;;-100;0'noise'=#{h['noise']};;;-100;0"
   end
 
   def run
