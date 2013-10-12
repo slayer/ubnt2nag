@@ -32,8 +32,8 @@ $_NOISE     = $this->DS[3];
 $_RXRATE    = $this->DS[4];
 $_TXRATE    = $this->DS[5];
 $_CCQ       = $this->DS[6];
-$_AQUALITY  = $this->DS[7];
-$_ACAPACITY = $this->DS[8];
+#$_AQUALITY  = $this->DS[7];
+#$_ACAPACITY = $this->DS[8];
 
 # Calculations
 $_SIGMIN = min ($_SIGNAL['MIN'], $_NOISE['MIN']);
@@ -73,12 +73,13 @@ $def[0] .= "LINE1:signalU{$_C_LINE}:'' ";
 $def[0] .= "LINE1:noiseU{$_C_LINE} ";
 
 # Define connection graph
-$ds_name[1] = "{$_CCQ['NAME']} {$_AQUALITY['NAME']} {$_ACAPACITY['NAME']}";
+#$ds_name[1] = "{$_CCQ['NAME']} {$_AQUALITY['NAME']} {$_ACAPACITY['NAME']}";
+$ds_name[1] = "{$_CCQ['NAME']}";
 $opt[1] = "--vertical-label 'Percent' --title '{$this->MACRO['DISP_HOSTNAME']} / {$this->MACRO['DISP_SERVICEDESC']} Connection' --lower-limit=0 ";
 
 $def[1]  = "DEF:ccq={$_CCQ['RRDFILE']}:{$_CCQ['DS']}:AVERAGE ";
-$def[1] .= "DEF:aquality={$_AQUALITY['RRDFILE']}:{$_AQUALITY['DS']}:AVERAGE ";
-$def[1] .= "DEF:acapacity={$_ACAPACITY['RRDFILE']}:{$_ACAPACITY['DS']}:AVERAGE ";
+#$def[1] .= "DEF:aquality={$_AQUALITY['RRDFILE']}:{$_AQUALITY['DS']}:AVERAGE ";
+#$def[1] .= "DEF:acapacity={$_ACAPACITY['RRDFILE']}:{$_ACAPACITY['DS']}:AVERAGE ";
 
 $def[1] .= "LINE1:ccq{$_C_CCQ}:'CCQ            ' ";
 $def[1] .= "GPRINT:ccq:MIN:'%3.0lf%% MIN ' ";
@@ -86,17 +87,17 @@ $def[1] .= "GPRINT:ccq:MAX:'%3.0lf%% MAX ' ";
 $def[1] .= "GPRINT:ccq:AVERAGE:'%3.0lf%% AVG ' ";
 $def[1] .= "GPRINT:ccq:LAST:'%3.0lf%% LAST\\n' ";
 
-$def[1] .= "LINE1:aquality{$_C_AQUALITY}:'Airmax Quality ' ";
-$def[1] .= "GPRINT:aquality:MIN:'%3.0lf%% MIN ' ";
-$def[1] .= "GPRINT:aquality:MAX:'%3.0lf%% MAX ' ";
-$def[1] .= "GPRINT:aquality:AVERAGE:'%3.0lf%% AVG ' ";
-$def[1] .= "GPRINT:aquality:LAST:'%3.0lf%% LAST\\n' ";
+#$def[1] .= "LINE1:aquality{$_C_AQUALITY}:'Airmax Quality ' ";
+#$def[1] .= "GPRINT:aquality:MIN:'%3.0lf%% MIN ' ";
+#$def[1] .= "GPRINT:aquality:MAX:'%3.0lf%% MAX ' ";
+#$def[1] .= "GPRINT:aquality:AVERAGE:'%3.0lf%% AVG ' ";
+#$def[1] .= "GPRINT:aquality:LAST:'%3.0lf%% LAST\\n' ";
 
-$def[1] .= "LINE1:acapacity{$_C_ACAPACITY}:'Airmax Capacity' ";
-$def[1] .= "GPRINT:acapacity:MIN:'%3.0lf%% MIN ' ";
-$def[1] .= "GPRINT:acapacity:MAX:'%3.0lf%% MAX ' ";
-$def[1] .= "GPRINT:acapacity:AVERAGE:'%3.0lf%% AVG ' ";
-$def[1] .= "GPRINT:acapacity:LAST:'%3.0lf%% LAST\\n' ";
+#$def[1] .= "LINE1:acapacity{$_C_ACAPACITY}:'Airmax Capacity' ";
+#$def[1] .= "GPRINT:acapacity:MIN:'%3.0lf%% MIN ' ";
+#$def[1] .= "GPRINT:acapacity:MAX:'%3.0lf%% MAX ' ";
+#$def[1] .= "GPRINT:acapacity:AVERAGE:'%3.0lf%% AVG ' ";
+#$def[1] .= "GPRINT:acapacity:LAST:'%3.0lf%% LAST\\n' ";
 
 # Define rate graph
 $ds_name[2] = "{$_TXRATE['NAME']} {$_RXRATE['NAME']}";
