@@ -69,7 +69,10 @@ class UBNT2NAG
     stdout.gsub!('Content-Type: application/json', '')
     h = JSON.load stdout
     logger.debug "Hash: #{h.to_yaml}"
-    puts "OK|'signal:#{h['wireless']['signal']}';;;-100;0'noise'=#{h['wireless']['noise']};;;-100;0'ccq'=#{ccq h['wireless']['ccq']};;100%;30%;'airmaxqual'=75%;;;;'airmaxcap'=71%;;;;"
+    puts "OK|'signal:#{h['wireless']['signal']}'" +
+          ";;;-100;0'noise'=#{h['wireless']['noise']};;;" +
+          "-100;0'ccq'=#{ccq h['wireless']['ccq']};;100%" +
+          ";30%;'airmaxqual'=75%;;;;'airmaxcap'=71%;;;;"
   end
 
   def mca_status
@@ -84,7 +87,13 @@ class UBNT2NAG
         h[key] = value
       end
     end
-    puts "UBNT OK: #{h['deviceName']}, #{h['deviceId']}, #{h['essid']}, #{h['freq']}, #{h['platform']}, #{h['lanSpeed']}, #{h['firmwareVersion']} | 'rxdata'=#{h['wlanRxBytes']}c;;;;'txdata'=#{h['wlanTxBytes']}c;;;;'signal'=#{h['signal']};-78;-83;-100;0'noise'=#{h['noise']};-91;-89;-100;0'rxrate'=#{h['wlanRxRate']};30;10;0;270'txrate'=#{h['wlanTxRate']};30;10;0;270'ccq'=#{ccq h['ccq']}%;90;85;;'wcon'=#{h['wlanConnections']};20;25;0;50'lavg'=#{h['loadavg']};5;10;0;30"
+    puts "UBNT OK: #{h['deviceName']}, #{h['deviceId']}, #{h['essid']}," +
+          " #{h['freq']}, #{h['platform']}, #{h['lanSpeed']}, #{h['firmwareVersion']} |" +
+          " 'rxdata'=#{h['wlanRxBytes']}c;;;;'txdata'=#{h['wlanTxBytes']}c;;;;" +
+          "'signal'=#{h['signal']};-78;-83;-100;0'noise'=#{h['noise']};-91;-89;" +
+          "-100;0'rxrate'=#{h['wlanRxRate']};30;10;0;270'txrate'=#{h['wlanTxRate']}" +
+          ";30;10;0;270'ccq'=#{ccq h['ccq']}%;90;85;;'wcon'=#{h['wlanConnections']};20" +
+          ";25;0;50'lavg'=#{h['loadavg']};5;10;0;30"
   end
 
   def run
@@ -92,6 +101,8 @@ class UBNT2NAG
     if self.respond_to?(cmd)
       begin
         self.send(cmd)
+      rescue Errno::ETIMEDOUT => e
+        puts "CRITICAL| #{e.class} #{e.message}"
       rescue => e
         puts "WARNING| #{e.class} #{e.message}"
       end
