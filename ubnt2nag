@@ -2,10 +2,12 @@
 
 require 'rubygems'
 require 'bundler/setup'
-require 'net/ssh'
-require 'slop'
-require 'json'
 require 'yaml'
+# require 'net/ssh'
+# require 'slop'
+# require 'json'
+
+Bundler.require
 
 
 class FlyTP2UB
@@ -14,7 +16,7 @@ class FlyTP2UB
     @opts ||= Slop.parse do
       banner "Usage: #{$0} [options] command\n  commands: status_cgi, mca_status"
 
-      on 'h', 'host=', 'Hostname'
+      on 'h', 'host=', 'Hostname: [user@]host[:port]'
       on 'u', 'user=', 'Username'
       on 'p', 'password=', 'Password', argument: :optional
       on 'k', 'key=', 'Path to private key', argument: :optional
@@ -36,14 +38,19 @@ class FlyTP2UB
 
 
   def ssh_exec cmd
-    host, port = opts[:host].split(':')
+    host = opts[:host]
+    user, host = host.split('@') if host =~ /@/
+    host, port = host.split(':')
     port ||= 22
-    stdout = ""
+    user ||= opts[:user] if opts[:user]
+
     params = { port: port, logger: logger }
     params[:password] = opts[:password] if opts[:password]
     params[:keys] = [opts[:key]] if opts[:key]
-    Net::SSH.start(host, opts[:user], params) do |ssh|
-      ssh .exec!(cmd) do |channel, stream, data|
+
+    stdout = ""
+    Net::SSH.start(host, user, params) do |ssh|
+      ssh.exec!(cmd) do |channel, stream, data|
         stdout << data if stream == :stdout
       end
     end
@@ -83,7 +90,11 @@ class FlyTP2UB
   def run
     cmd = ARGV[-1]
     if self.respond_to?(cmd)
-      self.send(cmd)
+      begin
+        self.send(cmd)
+      rescue => e
+        puts "WARNING| #{e.class} #{e.message}"
+      end
     else
       puts opts.help
     end
