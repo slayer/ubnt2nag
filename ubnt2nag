@@ -46,7 +46,8 @@ class UBNT2NAG
     port ||= 22
     user ||= opts[:user] if opts[:user]
 
-    params = { port: port, logger: logger }
+    params = { port: port }
+    params[:logger] = logger if opts[:verbose]
     params[:password] = opts[:password] if opts[:password]
     params[:keys] = [opts[:key]] if opts[:key]
 
