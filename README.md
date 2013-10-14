@@ -5,13 +5,6 @@ ubnt2nag
 Nagios plugin for UBNT devices
 
 
-Main features
-=============
-
-* Ruby small script, easy to understand and hack
-* Support 'status_cgi' and 'mca_status' commands
-
-
 Licence
 =======
 
@@ -21,6 +14,13 @@ either version 2.1 of the License, or (at your option) any later version.
 
 You should have received a copy of the GNU Lesser General Public License along with this
 script; if not, please visit http://www.gnu.org/copyleft/gpl.html for more information.
+
+
+Main features
+=============
+
+* Ruby small script, easy to understand and hack
+* Support 'status_cgi' and 'mca_status' commands
 
 
 News
