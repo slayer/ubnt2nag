@@ -4,7 +4,7 @@ ubnt2nag
 
 Usage:
 
-	ubnt2nag -h host[:port] -u user -p password -v command
+	ubnt2nag -h [user@]host[:port] -u user -p password -v command
 
 Where command is status_cgi or mca_status
 
@@ -30,7 +30,7 @@ Todo notes
 	в параметре platform заменять пробелы на подчеркивания
 
 	returnValues = { 'OK' : 0, 'WARNING' : 1, 'CRITICAL' : 2, 'UNKNOWN' : 3 }
-	
+
 	Если все хорошо, данные получены, писать "OK | ..." и выходить с кодом ошибки 0
 	При отсутствии связи, писать вместо "OK | ..." - "CRITICAL | No connect" и выходить с кодом ошибки 2
 	Если ошибка в передаче параметров командной строки - писать "UNKNOWN | ..." и выходить с кодом ошибки 3

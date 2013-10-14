@@ -31,8 +31,10 @@ class UBNT2NAG
   end
 
   def logger
-    @logger ||= Logger.new(STDERR)
-    @logger.level = opts.verbose? ? Logger::DEBUG : Logger::WARN
+    unless @logger
+      @logger = Logger.new(STDERR)
+      @logger.level = opts.verbose? ? Logger::DEBUG : Logger::WARN
+    end
     @logger
   end
 
