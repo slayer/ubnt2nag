@@ -103,16 +103,16 @@ class UBNT2NAG
     if self.respond_to?(cmd)
       begin
         self.send(cmd)
+        exit 0
       rescue Errno::ETIMEDOUT => e
         puts "CRITICAL| #{e.class} #{e.message}"
-        exit 1
       rescue => e
         puts "WARNING| #{e.class} #{e.message}"
-        exit 1
       end
     else
       puts opts.help
     end
+    exit 1
   end
 
 end
