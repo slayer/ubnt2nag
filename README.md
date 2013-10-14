@@ -17,13 +17,13 @@ News
 
 12.10.2013 Release 0.2
 
-  * x
-  * y
+* x
+* y
 
 12.10.2013 Release 0.1
 
-  * x
-  * y
+* x
+* y
 
 
 Install complex
@@ -46,19 +46,19 @@ Example Nagios config
 =====================
 
 	define command{
-	  command_name                    check_ubnt
-	  command_line                    /etc/nagios3/github/ubnt2nag/ubnt2nag -h '$HOSTADDRESS$' -u '$ARG1$' -k '$ARG2$' '$ARG3$'
+	  command_name           check_ubnt
+	  command_line           /etc/nagios3/github/ubnt2nag/ubnt2nag -h '$HOSTADDRESS$' -u '$ARG1$' -k '$ARG2$' '$ARG3$'
 	}
 
 	define service {
-	  use                             generic-service,srv-pnp
-	  hostgroup_name                  wl-kiev-bs1,wl-kiev-bs2,wl-kiev-bs3
-	  service_description             Ubnt Graph
-	  check_command                   check_ubnt!admin!/etc/nagios3/ssh/kiev_ubiquiti.priv!mca_status
-	  normal_check_interval    1
-	  retry_check_interval     1
-	  notifications_enabled    0
-	  notification_interval    0 ; set > 0 if you want to be renotified
+	  use                    generic-service,srv-pnp
+	  hostgroup_name         wl-kiev-bs1,wl-kiev-bs2,wl-kiev-bs3
+	  service_description    Ubnt Graph
+	  check_command          check_ubnt!admin!/etc/nagios3/ssh/kiev_ubiquiti.priv!mca_status
+	  normal_check_interval  1
+	  retry_check_interval   1
+	  notifications_enabled  0
+	  notification_interval  0 ; set > 0 if you want to be renotified
 	}
 
 
