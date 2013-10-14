@@ -1,4 +1,4 @@
-========
+
 ubnt2nag
 ========
 
@@ -8,8 +8,8 @@ Nagios plugin for UBNT devices
 Main features
 =============
 
-  * Ruby small script, easy to understand and hack
-  * Support 'status_cgi' and 'mca_status' commands
+* Ruby small script, easy to understand and hack
+* Support 'status_cgi' and 'mca_status' commands
 
 
 News
@@ -29,11 +29,8 @@ News
 Install complex
 ===============
 
-	mkdir -p /var/lib/nagios/github /etc/nagios3/script
-	cd /var/lib/nagios/github
-	git clone https://github.com/slayer/ubnt2nag.git
-	ln -sf /var/lib/nagios/github/ubnt2nag/ubnt2nag /etc/nagios3/script/ubnt2nag
-	ln -sf /var/lib/nagios/github/ubnt2nag/check_ubnt.php /usr/share/pnp4nagios/html/templates.dist/check_ubnt.php
+	git clone https://github.com/slayer/ubnt2nag.git /var/lib/nagios/github/ubnt2nag
+	sudo ln -sf /var/lib/nagios/github/ubnt2nag/check_ubnt.php /usr/share/pnp4nagios/html/templates.dist/check_ubnt.php
 
 
 Usage
