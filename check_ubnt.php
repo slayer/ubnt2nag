@@ -116,15 +116,15 @@ if ($CRIT[1] != "") {
 
 
 $ds_name[3] = "Connect rate";
-$opt[3] = "--vertical-label 'rate, Mbps' --title '{$this->MACRO['DISP_HOSTNAME']}' --lower-limit=0 ";
+$opt[3] = "--vertical-label 'rate, Mbit/s' --title '{$this->MACRO['DISP_HOSTNAME']}' --lower-limit=0 ";
 $def[3]  = "DEF:rxrate={$_RXRATE['RRDFILE']}:{$_RXRATE['DS']}:AVERAGE ";
 $def[3] .= "DEF:txrate={$_TXRATE['RRDFILE']}:{$_TXRATE['DS']}:AVERAGE ";
-$def[3] .= "LINE1:rxrate{$_C_RXRATE}:'rx Mbit/s' ";
+$def[3] .= "LINE1:rxrate{$_C_RXRATE}:'rx' ";
 $def[3] .= "GPRINT:rxrate:LAST:'%7.2lf %Slast' ";
 $def[3] .= "GPRINT:rxrate:AVERAGE:'%7.2lf %Savg' ";
 $def[3] .= "GPRINT:rxrate:MAX:'%7.2lf %Smax' ";
 $def[3] .= "GPRINT:rxrate:MIN:'%7.2lf %Smin' ";
-$def[3] .= "LINE1:txrate{$_C_TXRATE}:'tx, Mbit/s' ";
+$def[3] .= "LINE1:txrate{$_C_TXRATE}:'tx' ";
 $def[3] .= "GPRINT:txrate:LAST:'%7.2lf %Slast' ";
 $def[3] .= "GPRINT:txrate:AVERAGE:'%7.2lf %Savg' ";
 $def[3] .= "GPRINT:txrate:MAX:'%7.2lf %Smax' ";
