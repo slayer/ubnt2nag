@@ -66,19 +66,19 @@ $def[1] .= "DEF:noise={$_NOISE['RRDFILE']}:{$_NOISE['DS']}:AVERAGE ";
 #$def[1] .= "CDEF:noiseI=noiseU,UN,UNKN,NEGINF,IF ";
 
 
-#$def[1] .= "LINE1:signalU{$_C_SIGNAL}:'signal        ' ";
-$def[1] .= "AREA:signal{$_C_SIGNAL}:'signal' ";
-$def[1] .= "GPRINT:signal:LAST:'%7.2lf %Slast' ";
-$def[1] .= "GPRINT:signal:AVERAGE:'%7.2lf %Savg' ";
-$def[1] .= "GPRINT:signal:MAX:'%7.2lf %Smax' ";
-$def[1] .= "GPRINT:signal:MIN:'%7.2lf %Smin'\\n ";
+$def[1] .= "LINE1:signalU{$_C_SIGNAL}:'signal        ' ";
+$def[1] .= "AREA:signalU{$_C_SIGNAL}:'signal' ";
+$def[1] .= "GPRINT:signalU:LAST:'%7.2lf %Slast' ";
+$def[1] .= "GPRINT:signalU:AVERAGE:'%7.2lf %Savg' ";
+$def[1] .= "GPRINT:signalU:MAX:'%7.2lf %Smax' ";
+$def[1] .= "GPRINT:signalU:MIN:'%7.2lf %Smin'\\n ";
 
-#$def[1] .= "LINE1:noiseU{$_C_NOISE}:'noise         ' ";
-$def[1] .= "AREA:noise{$_C_NOISE}:'noise' ";
-$def[1] .= "GPRINT:noise:LAST:'%7.2lf %Slast' ";
-$def[1] .= "GPRINT:noise:AVERAGE:'%7.2lf %Savg' ";
-$def[1] .= "GPRINT:noise:MAX:'%7.2lf %Smax' ";
-$def[1] .= "GPRINT:noise:MIN:'%7.2lf %Smin'\\n ";
+$def[1] .= "LINE1:noiseU{$_C_NOISE}:'noise         ' ";
+$def[1] .= "AREA:noiseU{$_C_NOISE}:'noise' ";
+$def[1] .= "GPRINT:noiseU:LAST:'%7.2lf %Slast' ";
+$def[1] .= "GPRINT:noiseU:AVERAGE:'%7.2lf %Savg' ";
+$def[1] .= "GPRINT:noiseU:MAX:'%7.2lf %Smax' ";
+$def[1] .= "GPRINT:noiseU:MIN:'%7.2lf %Smin'\\n ";
 
 #$def[1] .= "LINE1:signalU{$_C_LINE}:'' ";
 #$def[1] .= "LINE1:noiseU{$_C_LINE} ";
