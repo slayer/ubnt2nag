@@ -5,7 +5,7 @@
 # By Zig Fisher
 # http://blog.flyrouter.net
 
-# Colors table - http://html-color-codes.info/Cvetovye-kody-HTML/
+
 $_C_WARNRULE  = '#FFFF00';
 $_C_CRITRULE  = '#FF0000';
 $_C_LINE      = '#000000';
@@ -21,7 +21,6 @@ $_C_USERS     = '#642EFE';
 $_C_AQUALITY  = '#ff00ff';
 $_C_ACAPACITY = '#000099';
 
-# Data sources
 $_RXDATA    = $this->DS[0];
 $_TXDATA    = $this->DS[1];
 $_SIGNAL    = $this->DS[2];
@@ -31,8 +30,6 @@ $_TXRATE    = $this->DS[5];
 $_CCQ       = $this->DS[6];
 $_WCON      = $this->DS[7];
 $_LAVG      = $this->DS[8];
-#$_AQUALITY  = $this->DS[9];
-#$_ACAPACITY = $this->DS[10];
 
 # Calculations
 #$_SIGMIN = min ($_SIGNAL['MIN'], $_NOISE['MIN']);
@@ -46,13 +43,13 @@ $def[0] .= "DEF:txdata={$_TXDATA['RRDFILE']}:{$_TXDATA['DS']}:AVERAGE ";
 $def[0] .= "CDEF:ibits=rxdata,8,* ";
 $def[0] .= "CDEF:obits=txdata,8,* ";
 $def[0] .= "AREA:ibits{$_C_RXDATA}:'in  ' ";
-$def[0] .= "GPRINT:ibits:LAST:'%7.2lf %Sbit/s last' ";
-$def[0] .= "GPRINT:ibits:AVERAGE:'%7.2lf %Sbit/s avg' ";
-$def[0] .= "GPRINT:ibits:MAX:'%7.2lf %Sbit/s max\\n' ";
+$def[0] .= "GPRINT:ibits:LAST:'%7.2lf %Slast' ";
+$def[0] .= "GPRINT:ibits:AVERAGE:'%7.2lf %Savg' ";
+$def[0] .= "GPRINT:ibits:MAX:'%7.2lf %Smax\\n' ";
 $def[0] .= "AREA:obits{$_C_TXDATA}:'out ' " ;
-$def[0] .= "GPRINT:obits:LAST:'%7.2lf %Sbit/s last' " ;
-$def[0] .= "GPRINT:obits:AVERAGE:'%7.2lf %Sbit/s avg' " ;
-$def[0] .= "GPRINT:obits:MAX:'%7.2lf %Sbit/s max\\n' ";
+$def[0] .= "GPRINT:obits:LAST:'%7.2lf %Slast' " ;
+$def[0] .= "GPRINT:obits:AVERAGE:'%7.2lf %Savg' " ;
+$def[0] .= "GPRINT:obits:MAX:'%7.2lf %Smax\\n' ";
 
 
 $ds_name[1] = "Signal & Noise";
@@ -61,30 +58,30 @@ $def[1]  = "DEF:signal={$_SIGNAL['RRDFILE']}:{$_SIGNAL['DS']}:AVERAGE ";
 $def[1] .= "DEF:noise={$_NOISE['RRDFILE']}:{$_NOISE['DS']}:AVERAGE ";
 
 ## If noise or signal equal 0 then the link was down
-$def[1] .= "CDEF:signalU=signal,0,EQ,NEGINF,signal,IF ";
-$def[1] .= "CDEF:noiseU=noise,0,EQ,UNKN,noise,IF ";
+#$def[1] .= "CDEF:signalU=signal,0,EQ,NEGINF,signal,IF ";
+#$def[1] .= "CDEF:noiseU=noise,0,EQ,UNKN,noise,IF ";
 #
 ## Drop values to -infinity for filling graph
-$def[1] .= "CDEF:signalI=signalU,UN,UNKN,NEGINF,IF ";
-$def[1] .= "CDEF:noiseI=noiseU,UN,UNKN,NEGINF,IF ";
+#$def[1] .= "CDEF:signalI=signalU,UN,UNKN,NEGINF,IF ";
+#$def[1] .= "CDEF:noiseI=noiseU,UN,UNKN,NEGINF,IF ";
 
-# Plot values
-$def[1] .= "LINE1:signalU{$_C_SIGNAL}:'signal        ' ";
-$def[1] .= "AREA:signalI{$_C_SIGNAL}:'':STACK ";
-$def[1] .= "GPRINT:signalU:MIN:'%3.0lf dBm MIN ' ";
-$def[1] .= "GPRINT:signalU:MAX:'%3.0lf dBm MAX ' ";
-$def[1] .= "GPRINT:signalU:AVERAGE:'%3.0lf dBm AVG ' ";
-$def[1] .= "GPRINT:signalU:LAST:'%3.0lf dBm LAST\\n' ";
 
-$def[1] .= "LINE1:noiseU{$_C_NOISE}:'noise         ' ";
-$def[1] .= "AREA:noiseI{$_C_NOISE}:'':STACK ";
-$def[1] .= "GPRINT:noiseU:MIN:'%3.0lf dBm min ' ";
-$def[1] .= "GPRINT:noiseU:MAX:'%3.0lf dBm MAX ' ";
-$def[1] .= "GPRINT:noiseU:AVERAGE:'%3.0lf dBm AVG ' ";
-$def[1] .= "GPRINT:noiseU:LAST:'%3.0lf dBm LAST\\n' ";
+#$def[1] .= "LINE1:signalU{$_C_SIGNAL}:'signal        ' ";
+$def[1] .= "AREA:signal{$_C_NOISE}:'signal' ";
+$def[1] .= "GPRINT:signal:LAST:'%7.2lf %Slast' ";
+$def[1] .= "GPRINT:signal:AVERAGE:'%7.2lf %Savg' ";
+$def[1] .= "GPRINT:signal:MAX:'%%7.2lf %Smax' ";
+$def[1] .= "GPRINT:signal:MIN:'%7.2lf %Smin'\\n ";
 
-$def[1] .= "LINE1:signalU{$_C_LINE}:'' ";
-$def[1] .= "LINE1:noiseU{$_C_LINE} ";
+#$def[1] .= "LINE1:noiseU{$_C_NOISE}:'noise         ' ";
+$def[1] .= "AREA:noise{$_C_NOISE}:'noise' ";
+$def[1] .= "GPRINT:noise:LAST:'%7.2lf %Slast' ";
+$def[1] .= "GPRINT:noise:AVERAGE:'%7.2lf %Savg' ";
+$def[1] .= "GPRINT:noise:MAX:'%%7.2lf %Smax' ";
+$def[1] .= "GPRINT:noise:MIN:'%7.2lf %Smin'\\n ";
+
+#$def[1] .= "LINE1:signalU{$_C_LINE}:'' ";
+#$def[1] .= "LINE1:noiseU{$_C_LINE} ";
 
 if($this->MACRO['TIMET'] != ""){
     $def[1] .= "VRULE:".$this->MACRO['TIMET']."#000000:\"Last Service Check \\n\" ";
@@ -124,7 +121,7 @@ $def[3] .= "GPRINT:txrate:MAX:'%7.2lf %Smax' ";
 $def[3] .= "GPRINT:txrate:MIN:'%7.2lf %Smin'\\n ";
 
 $ds_name[4] = "Connected users";
-$opt[4] = "--vertical-label 'fucking people' --title '{$this->MACRO['DISP_HOSTNAME']}' --lower-limit=0 ";
+$opt[4] = "--vertical-label 'people, ps' --title '{$this->MACRO['DISP_HOSTNAME']}' --lower-limit=0 ";
 $def[4] = "DEF:users={$_WCON['RRDFILE']}:{$_WCON['DS']}:AVERAGE ";
 $def[4] .= "AREA:users{$_C_USERS}:'users' ";
 $def[4] .= "GPRINT:users:LAST:'%7.2lf %Slast' ";
