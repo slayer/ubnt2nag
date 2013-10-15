@@ -20,8 +20,10 @@ $_C_NOISE     = '#B40431';
 $_C_CCQ       = '#DF7401';
 $_C_RXRATE    = '#00FF40';
 $_C_TXRATE    = '#2E64FE';
-$_C_RXDATA    = '#00FF40';
-$_C_TXDATA    = '#2E64FE';
+#$_C_RXDATA    = '#00FF40';
+#$_C_TXDATA    = '#2E64FE';
+$_C_RXDATA    = '#003300';
+$_C_TXDATA    = '#00ff00';
 $_C_AVERAGE   = '#FF0000';
 $_C_USERS     = '#642EFE';
 #
@@ -50,29 +52,29 @@ $_SIGMAX = max ($_SIGNAL['MAX'], $_NOISE['MAX']);
 
 # Define data graph
 $ds_name[0] = "{$_TXDATA['NAME']} {$_RXDATA['NAME']}";
-$opt[0] = "--vertical-label 'Data Throughput' --title '{$this->MACRO['DISP_HOSTNAME']} / {$this->MACRO['DISP_SERVICEDESC']} Traffic' --lower-limit=0 ";
+$opt[0] = "--vertical-label 'Data Throughput' -b 1024 --title '{$this->MACRO['DISP_HOSTNAME']} / {$this->MACRO['DISP_SERVICEDESC']} Traffic' --lower-limit=0 ";
 
 $def[0]  = "DEF:rxdata={$_RXDATA['RRDFILE']}:{$_RXDATA['DS']}:AVERAGE ";
 $def[0] .= "DEF:txdata={$_TXDATA['RRDFILE']}:{$_TXDATA['DS']}:AVERAGE ";
 
-$def[0] .= "CDEF:kbin=rxdata,1024,/ ";
-$def[0] .= "CDEF:kbout=txdata,1024,/ ";
+#$def[0] .= "CDEF:kbin=rxdata,1024,/ ";
+#$def[0] .= "CDEF:kbout=txdata,1024,/ ";
 
 #$def[0] .= "LINE1:kbin{$_C_RXDATA}:'Bandwidth In' ";
 #$def[0] .= "AREA:kbin{$_C_RXDATA}:'':STACK ";
-$def[0] .= "AREA:kbin{$_C_RXDATA}:'Bandwidth In' ";
-$def[0] .= "GPRINT:kbin:MIN:'%3.1lf KBps MIN ' ";
-$def[0] .= "GPRINT:kbin:MAX:'%3.1lf KBps MAX ' ";
-$def[0] .= "GPRINT:kbin:AVERAGE:'%3.1lf KBps AVG ' ";
-$def[0] .= "GPRINT:kbin:LAST:'%3.1lf KBps LAST\\n' ";
+$def[0] .= "AREA:rxdata{$_C_RXDATA}:'Bandwidth In' ";
+$def[0] .= "GPRINT:rxdata:MIN:'%3.1lf KBps MIN ' ";
+$def[0] .= "GPRINT:rxdata:MAX:'%3.1lf KBps MAX ' ";
+$def[0] .= "GPRINT:rxdata:AVERAGE:'%3.1lf KBps AVG ' ";
+$def[0] .= "GPRINT:rxdata:LAST:'%3.1lf KBps LAST\\n' ";
 
 #$def[0] .= "LINE1:kbout{$_C_TXDATA}:'Bandwidth Out' ";
 #$def[0] .= "AREA:kbout{$_C_TXDATA}:'':STACK ";
-$def[0] .= "AREA:kbout{$_C_TXDATA}:'Bandwidth Out' ";
-$def[0] .= "GPRINT:kbout:MIN:'%3.1lf KBps MIN ' ";
-$def[0] .= "GPRINT:kbout:MAX:'%3.1lf KBps MAX ' ";
-$def[0] .= "GPRINT:kbout:AVERAGE:'%3.1lf KBps AVG ' ";
-$def[0] .= "GPRINT:kbout:LAST:'%3.1lf KBps LAST\\n' ";
+$def[0] .= "AREA:txdata{$_C_TXDATA}:'Bandwidth Out' ";
+$def[0] .= "GPRINT:txdata:MIN:'%3.1lf KBps MIN ' ";
+$def[0] .= "GPRINT:txdata:MAX:'%3.1lf KBps MAX ' ";
+$def[0] .= "GPRINT:txdata:AVERAGE:'%3.1lf KBps AVG ' ";
+$def[0] .= "GPRINT:txdata:LAST:'%3.1lf KBps LAST\\n' ";
 
 
 # Define signal graph
