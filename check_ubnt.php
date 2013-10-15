@@ -16,13 +16,14 @@ $_C_CRITRULE  = '#FF0000';
 $_C_LINE      = '#000000';
 $_C_SIGNAL    = '#256aef';
 $_C_NOISE     = '#a00000';
-$_C_CCQ       = '#000000';
+$_C_CCQ       = '#FF00FF';
 $_C_AQUALITY  = '#ff00ff';
 $_C_ACAPACITY = '#000099';
 $_C_RXRATE    = '#ff00ff';
-$_C_TXRATE    = '#000099';
-$_C_RXDATA    = '#ff00ff';
-$_C_TXDATA    = '#00ff00';
+$_C_TXRATE    = '#ff00ff';
+$_C_RXDATA    = '#000099';
+#$_C_TXDATA   = '#00ff00';
+$_C_TXDATA    = '#256aef';
 
 # Data sources
 $_RXDATA    = $this->DS[0];
