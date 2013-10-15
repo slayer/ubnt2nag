@@ -22,6 +22,8 @@ $_C_RXRATE    = '#00FF40';
 $_C_TXRATE    = '#2E64FE';
 $_C_RXDATA    = '#00FF40';
 $_C_TXDATA    = '#2E64FE';
+$_C_AVERAGE   = '#FF0000';
+$_C_USERS     = '#642EFE';
 #
 $_C_LINE      = '#000000';
 $_C_AQUALITY  = '#ff00ff';
@@ -163,13 +165,14 @@ $opt[4] = "--vertical-label 'Ps' --title '{$this->MACRO['DISP_HOSTNAME']} / {$th
 $def[4]  = "DEF:wcon={$_WCON['RRDFILE']}:{$_WCON['DS']}:AVERAGE ";
 $def[4] .= "DEF:lavg={$_LAVG['RRDFILE']}:{$_LAVG['DS']}:AVERAGE ";
 
-$def[4] .= "LINE1:wcon{$_C_RXDATA}:'Users Connected' ";
+#$def[4] .= "LINE1:wcon{$_C_USERS}:'Users Connected' ";
+$def[4] .= "AREA:wcon{$_C_USERS}:'Connected Users' ";
 $def[4] .= "GPRINT:wcon:MIN:'%3.1lf Users MIN ' ";
 $def[4] .= "GPRINT:wcon:MAX:'%3.1lf Users MAX ' ";
 $def[4] .= "GPRINT:wcon:AVERAGE:'%3.1lf Users AVG ' ";
 $def[4] .= "GPRINT:wcon:LAST:'%3.1lf Users LAST\\n' ";
 
-$def[4] .= "LINE1:lavg{$_C_TXDATA}:'Load CPU' ";
+$def[4] .= "LINE1:lavg{$_C_AVERAGE}:'Load CPU' ";
 $def[4] .= "GPRINT:lavg:MIN:'%3.1lf Load MIN ' ";
 $def[4] .= "GPRINT:lavg:MAX:'%3.1lf Load MAX ' ";
 $def[4] .= "GPRINT:lavg:AVERAGE:'%3.1lf Load AVG ' ";
