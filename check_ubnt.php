@@ -103,10 +103,10 @@ $ds_name[2] = "Link quiality";
 $opt[2] = "--vertical-label 'quality, %' --title '{$this->MACRO['DISP_HOSTNAME']}' --lower-limit=0 ";
 $def[2]  = "DEF:ccq={$_CCQ['RRDFILE']}:{$_CCQ['DS']}:AVERAGE ";
 $def[2] .= "AREA:ccq{$_C_CCQ}:'ccq' ";
-$def[2] .= "GPRINT:ccq:LAST:'%7.2lf%% last ";
-$def[2] .= "GPRINT:ccq:AVERAGE:'%7.2lf%% avg ' ";
-$def[2] .= "GPRINT:ccq:MAX:'%7.2lf%% max ' ";
-$def[2] .= "GPRINT:ccq:MIN:'%7.2lf%% min '\\n ";
+$def[2] .= "GPRINT:ccq:LAST:'%7.2lf %Slast ";
+$def[2] .= "GPRINT:ccq:AVERAGE:'%7.2lf %Savg ' ";
+$def[2] .= "GPRINT:ccq:MAX:'%7.2lf %Smax ' ";
+$def[2] .= "GPRINT:ccq:MIN:'%7.2lf %Smin '\\n ";
 
 
 $ds_name[3] = "Connect rate";
