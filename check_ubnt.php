@@ -70,14 +70,14 @@ $def[1] .= "DEF:noise={$_NOISE['RRDFILE']}:{$_NOISE['DS']}:AVERAGE ";
 $def[1] .= "AREA:signal{$_C_NOISE}:'signal' ";
 $def[1] .= "GPRINT:signal:LAST:'%7.2lf %Slast' ";
 $def[1] .= "GPRINT:signal:AVERAGE:'%7.2lf %Savg' ";
-$def[1] .= "GPRINT:signal:MAX:'%%7.2lf %Smax' ";
+$def[1] .= "GPRINT:signal:MAX:'%7.2lf %Smax' ";
 $def[1] .= "GPRINT:signal:MIN:'%7.2lf %Smin'\\n ";
 
 #$def[1] .= "LINE1:noiseU{$_C_NOISE}:'noise         ' ";
 $def[1] .= "AREA:noise{$_C_NOISE}:'noise' ";
 $def[1] .= "GPRINT:noise:LAST:'%7.2lf %Slast' ";
 $def[1] .= "GPRINT:noise:AVERAGE:'%7.2lf %Savg' ";
-$def[1] .= "GPRINT:noise:MAX:'%%7.2lf %Smax' ";
+$def[1] .= "GPRINT:noise:MAX:'%7.2lf %Smax' ";
 $def[1] .= "GPRINT:noise:MIN:'%7.2lf %Smin'\\n ";
 
 #$def[1] .= "LINE1:signalU{$_C_LINE}:'' ";
