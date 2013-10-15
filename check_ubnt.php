@@ -134,12 +134,12 @@ $def[3] .= "GPRINT:txrate:MIN:'%7.2lf %SM mim' ";
 
 $ds_name[4] = "Connected users";
 $opt[4] = "--vertical-label 'fucking people' --title '{$this->MACRO['DISP_HOSTNAME']}' --lower-limit=0 ";
-$def[4] = "DEF:lavg={$_LAVG['RRDFILE']}:{$_LAVG['DS']}:AVERAGE ";
-$def[4] .= "AREA:lavg{$_C_USERS}:'* ' ";
-$def[4] .= "GPRINT:lavg:LAST:'%7.2lf %Susers last' ";
-$def[4] .= "GPRINT:lavg:AVERAGE:'%7.2lf %Susers avg' ";
-$def[4] .= "GPRINT:lavg:MAX:'%7.2lf %Susers max' ";
-$def[4] .= "GPRINT:lavg:MIN:'%7.2lf %Susers min' ";
+$def[4] = "DEF:user={$_LAVG['RRDFILE']}:{$_LAVG['DS']}:AVERAGE ";
+$def[4] .= "AREA:user{$_C_USERS}:'* ' ";
+$def[4] .= "GPRINT:user:LAST:'%7.2lf %Susers last' ";
+$def[4] .= "GPRINT:user:AVERAGE:'%7.2lf %Susers avg' ";
+$def[4] .= "GPRINT:user:MAX:'%7.2lf %Susers max' ";
+$def[4] .= "GPRINT:user:MIN:'%7.2lf %Susers min' ";
 
 
 $ds_name[5] = "Load average";
