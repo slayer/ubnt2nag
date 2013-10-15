@@ -49,8 +49,8 @@ $opt[0] = "--vertical-label 'Data Throughput' --title '{$this->MACRO['DISP_HOSTN
 $def[0]  = "DEF:rxdata={$_RXDATA['RRDFILE']}:{$_RXDATA['DS']}:AVERAGE ";
 $def[0] .= "DEF:txdata={$_TXDATA['RRDFILE']}:{$_TXDATA['DS']}:AVERAGE ";
 
-$def[0] .= "CDEF:kbin=rxdata,1024 ";
-$def[0] .= "CDEF:kbout=txdata,1024 ";
+$def[0] .= "CDEF:kbin='rxdata,1024' ";
+$def[0] .= "CDEF:kbout='txdata,1024' ";
 
 $def[0] .= "AREA1:kbin{$_C_RXDATA}:'Bandwidth In' ";
 $def[0] .= "GPRINT:kbin:MIN:'%3.1lf KBps MIN ' ";
