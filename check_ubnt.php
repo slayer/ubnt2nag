@@ -134,7 +134,7 @@ $def[3] .= "GPRINT:txrate:MIN:'%7.2lf %SM mim' ";
 
 $ds_name[4] = "Connected users";
 $opt[4] = "--vertical-label 'fucking people' --title '{$this->MACRO['DISP_HOSTNAME']}' --lower-limit=0 ";
-$def[4] .= "DEF:lavg={$_LAVG['RRDFILE']}:{$_LAVG['DS']}:AVERAGE ";
+$def[4] = "DEF:lavg={$_LAVG['RRDFILE']}:{$_LAVG['DS']}:AVERAGE ";
 $def[4] .= "AREA:lavg{$_C_USERS}:'* ' ";
 $def[4] .= "GPRINT:lavg:LAST:'%7.2lf %Susers last' ";
 $def[4] .= "GPRINT:lavg:AVERAGE:'%7.2lf %Susers avg' ";
@@ -144,7 +144,7 @@ $def[4] .= "GPRINT:lavg:MIN:'%7.2lf %Susers min' ";
 
 $ds_name[5] = "Load average";
 $opt[5] = "--vertical-label 'usage system' --title '{$this->MACRO['DISP_HOSTNAME']}' --lower-limit=0 ";
-$def[5] .= "DEF:lavg={$_LAVG['RRDFILE']}:{$_LAVG['DS']}:AVERAGE ";
+$def[5] = "DEF:lavg={$_LAVG['RRDFILE']}:{$_LAVG['DS']}:AVERAGE ";
 $def[5] .= "AREA:lavg{$_C_AVERAGE}:'* ' ";
 $def[5] .= "GPRINT:lavg:LAST:'%7.2lf %Sload last' ";
 $def[5] .= "GPRINT:lavg:AVERAGE:'%7.2lf %Sload avg' ";
