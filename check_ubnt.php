@@ -52,15 +52,17 @@ $def[0] .= "DEF:txdata={$_TXDATA['RRDFILE']}:{$_TXDATA['DS']}:AVERAGE ";
 $def[0] .= "CDEF:kbin=rxdata,1024,/ ";
 $def[0] .= "CDEF:kbout=txdata,1024,/ ";
 
-$def[0] .= "LINE1:kbin{$_C_RXDATA}:'Bandwidth In' ";
-$def[0] .= "AREA:kbin{$_C_RXDATA}:'':STACK ";
+#$def[0] .= "LINE1:kbin{$_C_RXDATA}:'Bandwidth In' ";
+#$def[0] .= "AREA:kbin{$_C_RXDATA}:'':STACK ";
+$def[0] .= "AREA:kbin{$_C_RXDATA}:'Bandwidth In' ";
 $def[0] .= "GPRINT:kbin:MIN:'%3.1lf KBps MIN ' ";
 $def[0] .= "GPRINT:kbin:MAX:'%3.1lf KBps MAX ' ";
 $def[0] .= "GPRINT:kbin:AVERAGE:'%3.1lf KBps AVG ' ";
 $def[0] .= "GPRINT:kbin:LAST:'%3.1lf KBps LAST\\n' ";
 
-$def[0] .= "LINE1:kbout{$_C_TXDATA}:'Bandwidth Out' ";
-$def[0] .= "AREA:kbout{$_C_TXDATA}:'':STACK ";
+#$def[0] .= "LINE1:kbout{$_C_TXDATA}:'Bandwidth Out' ";
+#$def[0] .= "AREA:kbout{$_C_TXDATA}:'':STACK ";
+$def[0] .= "AREA:kbout{$_C_TXDATA}:'Bandwidth Out' ";
 $def[0] .= "GPRINT:kbout:MIN:'%3.1lf KBps MIN ' ";
 $def[0] .= "GPRINT:kbout:MAX:'%3.1lf KBps MAX ' ";
 $def[0] .= "GPRINT:kbout:AVERAGE:'%3.1lf KBps AVG ' ";
