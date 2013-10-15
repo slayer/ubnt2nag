@@ -58,8 +58,8 @@ $def[1]  = "DEF:signal={$_SIGNAL['RRDFILE']}:{$_SIGNAL['DS']}:AVERAGE ";
 $def[1] .= "DEF:noise={$_NOISE['RRDFILE']}:{$_NOISE['DS']}:AVERAGE ";
 
 ## If noise or signal equal 0 then the link was down
-#$def[1] .= "CDEF:signalU=signal,0,EQ,NEGINF,signal,IF ";
-#$def[1] .= "CDEF:noiseU=noise,0,EQ,UNKN,noise,IF ";
+$def[1] .= "CDEF:signalU=signal,0,EQ,NEGINF,signal,IF ";
+$def[1] .= "CDEF:noiseU=noise,0,EQ,UNKN,noise,IF ";
 #
 ## Drop values to -infinity for filling graph
 #$def[1] .= "CDEF:signalI=signalU,UN,UNKN,NEGINF,IF ";
@@ -80,8 +80,8 @@ $def[1] .= "GPRINT:noiseU:AVERAGE:'%7.2lf %Savg' ";
 $def[1] .= "GPRINT:noiseU:MAX:'%7.2lf %Smax' ";
 $def[1] .= "GPRINT:noiseU:MIN:'%7.2lf %Smin'\\n ";
 
-#$def[1] .= "LINE1:signalU{$_C_LINE}:'' ";
-#$def[1] .= "LINE1:noiseU{$_C_LINE} ";
+$def[1] .= "LINE1:signalU{$_C_LINE}:'' ";
+$def[1] .= "LINE1:noiseU{$_C_LINE} ";
 
 if($this->MACRO['TIMET'] != ""){
     $def[1] .= "VRULE:".$this->MACRO['TIMET']."#000000:\"Last Service Check \\n\" ";
