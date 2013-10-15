@@ -40,8 +40,8 @@ News
 Install complex
 ===============
 
-	git clone https://github.com/slayer/ubnt2nag.git /var/lib/nagios/github/ubnt2nag
-	sudo ln -sf /var/lib/nagios/github/ubnt2nag/check_ubnt.php /usr/share/pnp4nagios/html/templates.dist/check_ubnt.php
+	git clone https://github.com/slayer/ubnt2nag.git /var/lib/nagios/ubnt2nag
+	sudo ln -sf /var/lib/nagios/ubnt2nag/check_ubnt.php /usr/share/pnp4nagios/html/templates.dist/check_ubnt.php
 
 
 Usage
@@ -55,7 +55,7 @@ Example Nagios config
 
 	define command{
 	  command_name           check_ubnt
-	  command_line           /etc/nagios3/github/ubnt2nag/ubnt2nag -h '$HOSTADDRESS$' -u '$ARG1$' -k '$ARG2$' '$ARG3$'
+	  command_line           (BUNDLE_GEMFILE=/var/lib/nagios/ubnt2nag/Gemfile /usr/local/rbenv/shims/bundle exec /var/lib/nagios/ubnt2nag/ubnt2nag -h $HOSTADDRESS$ -u $ARG1$ -k $ARG2$ $ARG3$)
 	}
 
 	define service {
