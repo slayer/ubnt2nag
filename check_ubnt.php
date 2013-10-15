@@ -138,15 +138,6 @@ $def[2] .= "GPRINT:ccq:LAST:'%3.0lf%% LAST\\n' ";
 #$def[2] .= "GPRINT:acapacity:AVERAGE:'%3.0lf%% AVG ' ";
 #$def[2] .= "GPRINT:acapacity:LAST:'%3.0lf%% LAST\\n' ";
 
-if($WARN[2] != ""){
-    if($UNIT[1] == "%%"){ $UNIT[1] = "%"; };
-	$def[1] .= rrd::hrule($WARN[1], "#FFFF00", "Warning  ".$WARN[1].$UNIT[1]."\\n");
-}
-if($CRIT[2] != ""){
-    if($UNIT[1] == "%%"){ $UNIT[1] = "%"; };
-	$def[1] .= rrd::hrule($CRIT[1], "#FF0000", "Critical ".$CRIT[1].$UNIT[1]."\\n");
-}
-
 
 # Define rate graph
 $ds_name[3] = "{$_TXRATE['NAME']} {$_RXRATE['NAME']}";
@@ -166,10 +157,6 @@ $def[3] .= "GPRINT:txrate:MIN:'%3.1lf Mbps MIN ' ";
 $def[3] .= "GPRINT:txrate:MAX:'%3.1lf Mbps MAX ' ";
 $def[3] .= "GPRINT:txrate:AVERAGE:'%3.1lf Mbps AVG ' ";
 $def[3] .= "GPRINT:txrate:LAST:'%3.1lf Mbps LAST\\n' ";
-
-if (isset($CRIT[3]) &amp;&amp; $CRIT[3] != "") {
-  $def[3] .= "HRULE:$CRIT[1]#FF0000:\"Critical ($NAME[1])\: " . $CRIT[3] . " " . $UNIT[3] . " \\n\" " ;
-}
 
 
 # Define data load
