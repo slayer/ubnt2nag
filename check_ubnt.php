@@ -14,15 +14,15 @@
 $_C_WARNRULE  = '#FFFF00';
 $_C_CRITRULE  = '#FF0000';
 $_C_LINE      = '#000000';
-$_C_SIGNAL    = '#256aef';
+$_C_SIGNAL    = '#256AEF';
 $_C_NOISE     = '#a00000';
 $_C_CCQ       = '#FF00FF';
 $_C_AQUALITY  = '#ff00ff';
 $_C_ACAPACITY = '#000099';
-$_C_RXRATE    = '#ff00ff';
-$_C_TXRATE    = '#ff00ff';
-$_C_RXDATA    = '#000099';
-#$_C_TXDATA   = '#00ff00';
+$_C_RXRATE    = '#FFEEFF';
+$_C_TXRATE    = '#FF00FF';
+$_C_RXDATA    = '#00ff00';
+#$_C_TXDATA   = '#000099';
 $_C_TXDATA    = '#256aef';
 
 # Data sources
@@ -113,7 +113,8 @@ $def[2]  = "DEF:ccq={$_CCQ['RRDFILE']}:{$_CCQ['DS']}:AVERAGE ";
 #$def[2] .= "DEF:aquality={$_AQUALITY['RRDFILE']}:{$_AQUALITY['DS']}:AVERAGE ";
 #$def[2] .= "DEF:acapacity={$_ACAPACITY['RRDFILE']}:{$_ACAPACITY['DS']}:AVERAGE ";
 
-$def[2] .= "LINE1:ccq{$_C_CCQ}:'CCQ            ' ";
+#$def[2] .= "LINE1:ccq{$_C_CCQ}:'CCQ            ' ";
+$def[2] .= "AREA:ccq{$_C_CCQ}:'CCQ            ' ";
 $def[2] .= "GPRINT:ccq:MIN:'%3.0lf%% MIN ' ";
 $def[2] .= "GPRINT:ccq:MAX:'%3.0lf%% MAX ' ";
 $def[2] .= "GPRINT:ccq:AVERAGE:'%3.0lf%% AVG ' ";
