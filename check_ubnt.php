@@ -1,34 +1,25 @@
 <?php
-# coding: utf-8
 #
 # Ubiquiti pnp4nagios template
 #
 # By Zig Fisher
-# flyrouter@gmail.com
 # http://blog.flyrouter.net
-# Licence GPLv2
-# Version 0.1
-
 
 # Colors table - http://html-color-codes.info/Cvetovye-kody-HTML/
-#
 $_C_WARNRULE  = '#FFFF00';
 $_C_CRITRULE  = '#FF0000';
-#
+$_C_LINE      = '#000000';
 $_C_SIGNAL    = '#04B4AE';
 $_C_NOISE     = '#B40431';
 $_C_CCQ       = '#DF7401';
 $_C_RXRATE    = '#00FF40';
 $_C_TXRATE    = '#2E64FE';
-$_C_RXDATA    = '#00FF40';
+$_C_RXDATA    = '#00FF00';
 $_C_TXDATA    = '#2E64FE';
 $_C_AVERAGE   = '#FF0000';
 $_C_USERS     = '#642EFE';
-#
-$_C_LINE      = '#000000';
 $_C_AQUALITY  = '#ff00ff';
 $_C_ACAPACITY = '#000099';
-
 
 # Data sources
 $_RXDATA    = $this->DS[0];
@@ -44,42 +35,28 @@ $_LAVG      = $this->DS[8];
 #$_ACAPACITY = $this->DS[10];
 
 # Calculations
-$_SIGMIN = min ($_SIGNAL['MIN'], $_NOISE['MIN']);
-$_SIGMAX = max ($_SIGNAL['MAX'], $_NOISE['MAX']);
+#$_SIGMIN = min ($_SIGNAL['MIN'], $_NOISE['MIN']);
+#$_SIGMAX = max ($_SIGNAL['MAX'], $_NOISE['MAX']);
 
 
-# Define data graph
-$ds_name[0] = "{$_TXDATA['NAME']} {$_RXDATA['NAME']}";
-$opt[0] = "--vertical-label 'Data Throughput' -b 1024 --title '{$this->MACRO['DISP_HOSTNAME']} / {$this->MACRO['DISP_SERVICEDESC']} Traffic' --lower-limit=0 ";
-
+$ds_name[0] = "Network Interface Traffic";
+$opt[0] = "--vertical-label 'traffic, bps' -b 1024 --title '{$this->MACRO['DISP_HOSTNAME']}' --lower-limit=0 ";
 $def[0]  = "DEF:rxdata={$_RXDATA['RRDFILE']}:{$_RXDATA['DS']}:AVERAGE ";
 $def[0] .= "DEF:txdata={$_TXDATA['RRDFILE']}:{$_TXDATA['DS']}:AVERAGE ";
-
-$def[0] .= "CDEF:kbin=rxdata,8,* ";
-$def[0] .= "CDEF:kbout=txdata,8,* ";
-
-$def[0] .= "LINE1:kbin{$_C_RXDATA}:'Bandwidth In' ";
-$def[0] .= "AREA:kbin{$_C_RXDATA}:'':STACK ";
-#$def[0] .= "AREA:kbin{$_C_RXDATA}:'Bandwidth In' ";
-$def[0] .= "GPRINT:kbin:MIN:'%3.1lf KBps MIN ' ";
-$def[0] .= "GPRINT:kbin:MAX:'%3.1lf KBps MAX ' ";
-$def[0] .= "GPRINT:kbin:AVERAGE:'%3.1lf KBps AVG ' ";
-$def[0] .= "GPRINT:kbin:LAST:'%3.1lf KBps LAST\\n' ";
-
-$def[0] .= "LINE1:kbout{$_C_TXDATA}:'Bandwidth Out' ";
-$def[0] .= "AREA:kbout{$_C_TXDATA}:'':STACK ";
-#$def[0] .= "AREA:kbout{$_C_TXDATA}:'Bandwidth Out' ";
-$def[0] .= "GPRINT:kbout:MIN:'%3.1lf KBps MIN ' ";
-$def[0] .= "GPRINT:kbout:MAX:'%3.1lf KBps MAX ' ";
-$def[0] .= "GPRINT:kbout:AVERAGE:'%3.1lf KBps AVG ' ";
-$def[0] .= "GPRINT:kbout:LAST:'%3.1lf KBps LAST\\n' ";
+$def[0] .= "CDEF:ibits=rxdata,8,* ";
+$def[0] .= "CDEF:obits=txdata,8,* ";
+$def[0] .= "AREA:ibits{$_C_RXDATA}:'in  ' ";
+$def[0] .= "GPRINT:ibits:LAST:'%7.2lf %Sbit/s last' ";
+$def[0] .= "GPRINT:ibits:AVERAGE:'%7.2lf %Sbit/s avg' ";
+$def[0] .= "GPRINT:ibits:MAX:'%7.2lf %Sbit/s max\\n' ";
+$def[0] .= "AREA:obits{$_C_TXDATA}:'out ' " ;
+$def[0] .= "GPRINT:obits:LAST:'%7.2lf %Sbit/s last' " ;
+$def[0] .= "GPRINT:obits:AVERAGE:'%7.2lf %Sbit/s avg' " ;
+$def[0] .= "GPRINT:obits:MAX:'%7.2lf %Sbit/s max\\n' ";
 
 
-
-# Define signal graph
-$ds_name[1] = "{$_SIGNAL['NAME']} {$_NOISE['NAME']}";
-$opt[1] = "--vertical-label 'dBm' --title '{$this->MACRO['DISP_HOSTNAME']} / {$this->MACRO['DISP_SERVICEDESC']} Signal' --alt-y-grid ";
-
+$ds_name[1] = "Signal & Noise";
+$opt[1] = "--vertical-label 'signal/noise, dBm' --title '{$this->MACRO['DISP_HOSTNAME']}' --alt-y-grid ";
 $def[1]  = "DEF:signal={$_SIGNAL['RRDFILE']}:{$_SIGNAL['DS']}:AVERAGE ";
 $def[1] .= "DEF:noise={$_NOISE['RRDFILE']}:{$_NOISE['DS']}:AVERAGE ";
 
@@ -101,7 +78,7 @@ $def[1] .= "GPRINT:signalU:LAST:'%3.0lf dBm LAST\\n' ";
 
 $def[1] .= "LINE1:noiseU{$_C_NOISE}:'Noise         ' ";
 $def[1] .= "AREA:noiseI{$_C_NOISE}:'':STACK ";
-$def[1] .= "GPRINT:noiseU:MIN:'%3.0lf dBm MIN ' ";
+$def[1] .= "GPRINT:noiseU:MIN:'%3.0lf dBm min ' ";
 $def[1] .= "GPRINT:noiseU:MAX:'%3.0lf dBm MAX ' ";
 $def[1] .= "GPRINT:noiseU:AVERAGE:'%3.0lf dBm AVG ' ";
 $def[1] .= "GPRINT:noiseU:LAST:'%3.0lf dBm LAST\\n' ";
@@ -126,56 +103,53 @@ $def[2] .= "GPRINT:ccq:MAX:'%3.0lf%% MAX ' ";
 $def[2] .= "GPRINT:ccq:AVERAGE:'%3.0lf%% AVG ' ";
 $def[2] .= "GPRINT:ccq:LAST:'%3.0lf%% LAST\\n' ";
 
-#$def[2] .= "LINE1:aquality{$_C_AQUALITY}:'Airmax Quality ' ";
-#$def[2] .= "GPRINT:aquality:MIN:'%3.0lf%% MIN ' ";
-#$def[2] .= "GPRINT:aquality:MAX:'%3.0lf%% MAX ' ";
-#$def[2] .= "GPRINT:aquality:AVERAGE:'%3.0lf%% AVG ' ";
-#$def[2] .= "GPRINT:aquality:LAST:'%3.0lf%% LAST\\n' ";
-
-#$def[2] .= "LINE1:acapacity{$_C_ACAPACITY}:'Airmax Capacity' ";
-#$def[2] .= "GPRINT:acapacity:MIN:'%3.0lf%% MIN ' ";
-#$def[2] .= "GPRINT:acapacity:MAX:'%3.0lf%% MAX ' ";
-#$def[2] .= "GPRINT:acapacity:AVERAGE:'%3.0lf%% AVG ' ";
-#$def[2] .= "GPRINT:acapacity:LAST:'%3.0lf%% LAST\\n' ";
+if($this->MACRO['TIMET'] != ""){
+    $def[3] .= "VRULE:".$this->MACRO['TIMET']."#000000:\"Last Service Check \\n\" ";
+}
+if ($WARN[1] != "") {
+    $def[3] .= "HRULE:$WARN[1]#FF8C00:\"In-Traffic Warning on $WARN[1] \" ";
+}
+if ($CRIT[1] != "") {
+    $def[3] .= "HRULE:$CRIT[1]#FF008C:\"In-Traffic Critical on $CRIT[1] \" ";
+}
 
 
-# Define rate graph
-$ds_name[3] = "{$_TXRATE['NAME']} {$_RXRATE['NAME']}";
-$opt[3] = "--vertical-label 'Mbps' --title '{$this->MACRO['DISP_HOSTNAME']} / {$this->MACRO['DISP_SERVICEDESC']} Rate' --lower-limit=0 ";
 
+$ds_name[3] = "Connect rate";
+$opt[3] = "--vertical-label 'rate, Mbps' --title '{$this->MACRO['DISP_HOSTNAME']}' --lower-limit=0 ";
 $def[3]  = "DEF:rxrate={$_RXRATE['RRDFILE']}:{$_RXRATE['DS']}:AVERAGE ";
 $def[3] .= "DEF:txrate={$_TXRATE['RRDFILE']}:{$_TXRATE['DS']}:AVERAGE ";
-
-$def[3] .= "LINE1:rxrate{$_C_RXRATE}:'Rx Rate' ";
-$def[3] .= "GPRINT:rxrate:MIN:'%3.1lf Mbps MIN ' ";
-$def[3] .= "GPRINT:rxrate:MAX:'%3.1lf Mbps MAX ' ";
-$def[3] .= "GPRINT:rxrate:AVERAGE:'%3.1lf Mbps AVG ' ";
-$def[3] .= "GPRINT:rxrate:LAST:'%3.1lf Mbps LAST\\n' ";
-
-$def[3] .= "LINE1:txrate{$_C_TXRATE}:'Tx Rate' ";
-$def[3] .= "GPRINT:txrate:MIN:'%3.1lf Mbps MIN ' ";
-$def[3] .= "GPRINT:txrate:MAX:'%3.1lf Mbps MAX ' ";
-$def[3] .= "GPRINT:txrate:AVERAGE:'%3.1lf Mbps AVG ' ";
-$def[3] .= "GPRINT:txrate:LAST:'%3.1lf Mbps LAST\\n' ";
+$def[3] .= "LINE1:rxrate{$_C_TXRATE}:'rx rate' ";
+$def[3] .= "GPRINT:rxrate:LAST:'%7.2lf %SMbps last' ";
+$def[3] .= "GPRINT:rxrate:AVERAGE:'%7.2lf %SMbps avg' ";
+$def[3] .= "GPRINT:rxrate:MAX:'%7.2lf %SMbps max' ";
+$def[3] .= "GPRINT:rxrate:MIN:'%7.2lf %SMbps mim' ";
+$def[3] .= "LINE1:txrate{$_C_TXRATE}:'tx rate' ";
+$def[3] .= "GPRINT:txrate:LAST:'%7.2lf %SMbps last' ";
+$def[3] .= "GPRINT:txrate:AVERAGE:'%7.2lf %SMbps avg' ";
+$def[3] .= "GPRINT:txrate:MAX:'%7.2lf %SMbps max' ";
+$def[3] .= "GPRINT:txrate:MIN:'%7.2lf %SMbps mim' ";
 
 
-# Define data load
-$ds_name[4] = "{$_WCON['NAME']} {$_LAVG['NAME']}";
-$opt[4] = "--vertical-label 'Ps' --title '{$this->MACRO['DISP_HOSTNAME']} / {$this->MACRO['DISP_SERVICEDESC']} Usage' --lower-limit=0 ";
 
-$def[4]  = "DEF:wcon={$_WCON['RRDFILE']}:{$_WCON['DS']}:AVERAGE ";
-$def[4] .= "DEF:lavg={$_LAVG['RRDFILE']}:{$_LAVG['DS']}:AVERAGE ";
+#$ds_name[4] = "Connected users";
+#$opt[4] = "--vertical-label 'fucking people' --title '{$this->MACRO['DISP_HOSTNAME']}' --lower-limit=0 ";
+#$def[4] .= "DEF:lavg={$_LAVG['RRDFILE']}:{$_LAVG['DS']}:AVERAGE ";
+#$def[4] .= "AREA:lavg{$_C_USERS}:'* ' ";
+#$def[4] .= "GPRINT:lavg:LAST:'%7.2lf %Susers last' ";
+#$def[4] .= "GPRINT:lavg:AVERAGE:'%7.2lf %Susers avg' ";
+#$def[4] .= "GPRINT:lavg:MAX:'%7.2lf %Susers max' ";
+#$def[4] .= "GPRINT:lavg:MIN:'%7.2lf %Susers min' ";
 
-$def[4] .= "AREA:wcon{$_C_USERS}:'Connected Users' ";
-$def[4] .= "GPRINT:wcon:MIN:'%3.1lf Users MIN ' ";
-$def[4] .= "GPRINT:wcon:MAX:'%3.1lf Users MAX ' ";
-$def[4] .= "GPRINT:wcon:AVERAGE:'%3.1lf Users AVG ' ";
-$def[4] .= "GPRINT:wcon:LAST:'%3.1lf Users LAST\\n' ";
 
-$def[4] .= "AREA:lavg{$_C_AVERAGE}:'Load Average   ' ";
-$def[4] .= "GPRINT:lavg:MIN:'%3.1lf Load MIN ' ";
-$def[4] .= "GPRINT:lavg:MAX:'%3.1lf Load MAX ' ";
-$def[4] .= "GPRINT:lavg:AVERAGE:'%3.1lf Load AVG ' ";
-$def[4] .= "GPRINT:lavg:LAST:'%3.1lf Load LAST\\n' ";
+#$ds_name[5] = "Load average";
+#$opt[5] = "--vertical-label 'usage system' --title '{$this->MACRO['DISP_HOSTNAME']}' --lower-limit=0 ";
+#$def[5] .= "DEF:lavg={$_LAVG['RRDFILE']}:{$_LAVG['DS']}:AVERAGE ";
+#$def[5] .= "AREA:lavg{$_C_AVERAGE}:'* ' ";
+#$def[5] .= "GPRINT:lavg:LAST:'%7.2lf %Sload last' ";
+#$def[5] .= "GPRINT:lavg:AVERAGE:'%7.2lf %Sload avg' ";
+#$def[5] .= "GPRINT:lavg:MAX:'%7.2lf %Sload max' ";
+#$def[5] .= "GPRINT:lavg:MIN:'%7.2lf %Sload min' ";
+
 
 ?>
