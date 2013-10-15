@@ -101,17 +101,16 @@ if ($CRIT[1] != "") {
 
 $ds_name[2] = "Link quiality";
 $opt[2] = "--vertical-label 'quality, %' --title '{$this->MACRO['DISP_HOSTNAME']}' --lower-limit=0 ";
-$def[2]  = "DEF:ccq={$_CCQ['RRDFILE']}:{$_CCQ['DS']}:AVERAGE ";
+$def[2] = "DEF:ccq={$_CCQ['RRDFILE']}:{$_CCQ['DS']}:AVERAGE ";
 $def[2] .= "AREA:ccq{$_C_CCQ}:'ccq' ";
-$def[2] .= "GPRINT:ccq:LAST:'%7.2lf %Slast ";
-$def[2] .= "GPRINT:ccq:AVERAGE:'%7.2lf %Savg ' ";
-$def[2] .= "GPRINT:ccq:MAX:'%7.2lf %Smax ' ";
-$def[2] .= "GPRINT:ccq:MIN:'%7.2lf %Smin '\\n ";
-
+$def[2] .= "GPRINT:ccq:LAST:'%7.2lf %Slast' ";
+$def[2] .= "GPRINT:ccq:AVERAGE:'%7.2lf %Savg' ";
+$def[2] .= "GPRINT:ccq:MAX:'%7.2lf %Smax' ";
+$def[2] .= "GPRINT:ccq:MIN:'%7.2lf %Smin'\\n ";
 
 $ds_name[3] = "Connect rate";
 $opt[3] = "--vertical-label 'rate, Mbit/s' --title '{$this->MACRO['DISP_HOSTNAME']}' --lower-limit=0 ";
-$def[3]  = "DEF:rxrate={$_RXRATE['RRDFILE']}:{$_RXRATE['DS']}:AVERAGE ";
+$def[3] = "DEF:rxrate={$_RXRATE['RRDFILE']}:{$_RXRATE['DS']}:AVERAGE ";
 $def[3] .= "DEF:txrate={$_TXRATE['RRDFILE']}:{$_TXRATE['DS']}:AVERAGE ";
 $def[3] .= "LINE1:rxrate{$_C_RXRATE}:'rx' ";
 $def[3] .= "GPRINT:rxrate:LAST:'%7.2lf %Slast' ";
