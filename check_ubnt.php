@@ -69,14 +69,14 @@ $def[1] .= "CDEF:signalI=signalU,UN,UNKN,NEGINF,IF ";
 $def[1] .= "CDEF:noiseI=noiseU,UN,UNKN,NEGINF,IF ";
 
 # Plot values
-$def[1] .= "LINE1:signalU{$_C_SIGNAL}:'Signal        ' ";
+$def[1] .= "LINE1:signalU{$_C_SIGNAL}:'signal        ' ";
 $def[1] .= "AREA:signalI{$_C_SIGNAL}:'':STACK ";
 $def[1] .= "GPRINT:signalU:MIN:'%3.0lf dBm MIN ' ";
 $def[1] .= "GPRINT:signalU:MAX:'%3.0lf dBm MAX ' ";
 $def[1] .= "GPRINT:signalU:AVERAGE:'%3.0lf dBm AVG ' ";
 $def[1] .= "GPRINT:signalU:LAST:'%3.0lf dBm LAST\\n' ";
 
-$def[1] .= "LINE1:noiseU{$_C_NOISE}:'Noise         ' ";
+$def[1] .= "LINE1:noiseU{$_C_NOISE}:'noise         ' ";
 $def[1] .= "AREA:noiseI{$_C_NOISE}:'':STACK ";
 $def[1] .= "GPRINT:noiseU:MIN:'%3.0lf dBm min ' ";
 $def[1] .= "GPRINT:noiseU:MAX:'%3.0lf dBm MAX ' ";
@@ -86,33 +86,27 @@ $def[1] .= "GPRINT:noiseU:LAST:'%3.0lf dBm LAST\\n' ";
 $def[1] .= "LINE1:signalU{$_C_LINE}:'' ";
 $def[1] .= "LINE1:noiseU{$_C_LINE} ";
 
-
-# Define connection graph
-#$ds_name[1] = "{$_CCQ['NAME']} {$_AQUALITY['NAME']} {$_ACAPACITY['NAME']}";
-$ds_name[2] = "{$_CCQ['NAME']}";
-$opt[2] = "--vertical-label 'Percent' --title '{$this->MACRO['DISP_HOSTNAME']} / {$this->MACRO['DISP_SERVICEDESC']} Quality' --lower-limit=0 ";
-
-$def[2]  = "DEF:ccq={$_CCQ['RRDFILE']}:{$_CCQ['DS']}:AVERAGE ";
-#$def[2] .= "DEF:aquality={$_AQUALITY['RRDFILE']}:{$_AQUALITY['DS']}:AVERAGE ";
-#$def[2] .= "DEF:acapacity={$_ACAPACITY['RRDFILE']}:{$_ACAPACITY['DS']}:AVERAGE ";
-
-#$def[2] .= "LINE1:ccq{$_C_CCQ}:'CCQ            ' ";
-$def[2] .= "AREA:ccq{$_C_CCQ}:'CCQ            ' ";
-$def[2] .= "GPRINT:ccq:MIN:'%3.0lf%% MIN ' ";
-$def[2] .= "GPRINT:ccq:MAX:'%3.0lf%% MAX ' ";
-$def[2] .= "GPRINT:ccq:AVERAGE:'%3.0lf%% AVG ' ";
-$def[2] .= "GPRINT:ccq:LAST:'%3.0lf%% LAST\\n' ";
-
 if($this->MACRO['TIMET'] != ""){
-    $def[2] .= "VRULE:".$this->MACRO['TIMET']."#000000:\"Last Service Check \\n\" ";
+    $def[1] .= "VRULE:".$this->MACRO['TIMET']."#000000:\"Last Service Check \\n\" ";
 }
 if ($WARN[1] != "") {
-    $def[2] .= "HRULE:$WARN[1]#FF8C00:\"In-Traffic Warning on $WARN[1] \" ";
+    $def[1] .= "HRULE:$WARN[1]#FF8C00:\"In-Traffic Warning on $WARN[1] \" ";
 }
 if ($CRIT[1] != "") {
-    $def[2] .= "HRULE:$CRIT[1]#FF008C:\"In-Traffic Critical on $CRIT[1] \" ";
+    $def[1] .= "HRULE:$CRIT[1]#FF008C:\"In-Traffic Critical on $CRIT[1] \" ";
 }
 
+
+
+
+$ds_name[2] = "Link quiality";
+$opt[2] = "--vertical-label 'quality, %' --title '{$this->MACRO['DISP_HOSTNAME']}' --lower-limit=0 ";
+$def[2]  = "DEF:ccq={$_CCQ['RRDFILE']}:{$_CCQ['DS']}:AVERAGE ";
+$def[2] .= "AREA:ccq{$_C_CCQ}:'ccq' ";
+$def[2] .= "GPRINT:ccq:LAST:'%7.2lf%% last ";
+$def[2] .= "GPRINT:ccq:AVERAGE:'%7.2lf%% avg ' ";
+$def[2] .= "GPRINT:ccq:MAX:'%7.2lf%% max ' ";
+$def[2] .= "GPRINT:ccq:MIN:'%7.2lf%% min '\\n ";
 
 
 $ds_name[3] = "Connect rate";
@@ -123,12 +117,12 @@ $def[3] .= "LINE1:rxrate{$_C_RXRATE}:'rx' ";
 $def[3] .= "GPRINT:rxrate:LAST:'%7.2lf %Slast' ";
 $def[3] .= "GPRINT:rxrate:AVERAGE:'%7.2lf %Savg' ";
 $def[3] .= "GPRINT:rxrate:MAX:'%7.2lf %Smax' ";
-$def[3] .= "GPRINT:rxrate:MIN:'%7.2lf %Smin' ";
+$def[3] .= "GPRINT:rxrate:MIN:'%7.2lf %Smin'\\n ";
 $def[3] .= "LINE1:txrate{$_C_TXRATE}:'tx' ";
 $def[3] .= "GPRINT:txrate:LAST:'%7.2lf %Slast' ";
 $def[3] .= "GPRINT:txrate:AVERAGE:'%7.2lf %Savg' ";
 $def[3] .= "GPRINT:txrate:MAX:'%7.2lf %Smax' ";
-$def[3] .= "GPRINT:txrate:MIN:'%7.2lf %Smin' ";
+$def[3] .= "GPRINT:txrate:MIN:'%7.2lf %Smin'\\n ";
 
 $ds_name[4] = "Connected users";
 $opt[4] = "--vertical-label 'fucking people' --title '{$this->MACRO['DISP_HOSTNAME']}' --lower-limit=0 ";
@@ -137,7 +131,7 @@ $def[4] .= "AREA:users{$_C_USERS}:'users' ";
 $def[4] .= "GPRINT:users:LAST:'%7.2lf %Slast' ";
 $def[4] .= "GPRINT:users:AVERAGE:'%7.2lf %Savg' ";
 $def[4] .= "GPRINT:users:MAX:'%7.2lf %Smax' ";
-$def[4] .= "GPRINT:users:MIN:'%7.2lf %Smin' ";
+$def[4] .= "GPRINT:users:MAX:'%7.2lf %Smin'\\n ";
 
 $ds_name[5] = "Load average";
 $opt[5] = "--vertical-label 'usage system' --title '{$this->MACRO['DISP_HOSTNAME']}' --lower-limit=0 ";
@@ -146,6 +140,6 @@ $def[5] .= "AREA:lavg{$_C_AVERAGE}:'load' ";
 $def[5] .= "GPRINT:lavg:LAST:'%7.2lf %Slast' ";
 $def[5] .= "GPRINT:lavg:AVERAGE:'%7.2lf %Savg' ";
 $def[5] .= "GPRINT:lavg:MAX:'%7.2lf %Smax' ";
-$def[5] .= "GPRINT:lavg:MIN:'%7.2lf %Smin' ";
+$def[5] .= "GPRINT:lavg:MAX:'%7.2lf %Smin'\\n ";
 
 ?>
