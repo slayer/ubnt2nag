@@ -49,20 +49,20 @@ $opt[0] = "--vertical-label 'Data Throughput' --title '{$this->MACRO['DISP_HOSTN
 $def[0]  = "DEF:rxdata={$_RXDATA['RRDFILE']}:{$_RXDATA['DS']}:AVERAGE ";
 $def[0] .= "DEF:txdata={$_TXDATA['RRDFILE']}:{$_TXDATA['DS']}:AVERAGE ";
 
-$def[0] .= "CDEF:kbin='rxdata,1024' ";
-$def[0] .= "CDEF:kbout='txdata,1024' ";
+#$def[0] .= "CDEF:kbin='rxdata,1024' ";
+#$def[0] .= "CDEF:kbout='txdata,1024' ";
 
-$def[0] .= "AREA1:kbin{$_C_RXDATA}:'Bandwidth In' ";
-$def[0] .= "GPRINT:kbin:MIN:'%3.1lf KBps MIN ' ";
-$def[0] .= "GPRINT:kbin:MAX:'%3.1lf KBps MAX ' ";
-$def[0] .= "GPRINT:kbin:AVERAGE:'%3.1lf KBps AVG ' ";
-$def[0] .= "GPRINT:kbin:LAST:'%3.1lf KBps LAST\\n' ";
+$def[0] .= "AREA1:rxdata{$_C_RXDATA}:'Bandwidth In' ";
+$def[0] .= "GPRINT:rxdata:MIN:'%3.1lf KBps MIN ' ";
+$def[0] .= "GPRINT:rxdata:MAX:'%3.1lf KBps MAX ' ";
+$def[0] .= "GPRINT:rxdata:AVERAGE:'%3.1lf KBps AVG ' ";
+$def[0] .= "GPRINT:rxdata:LAST:'%3.1lf KBps LAST\\n' ";
 
-$def[0] .= "AREA1:kbout{$_C_TXDATA}:'Bandwidth Out' ";
-$def[0] .= "GPRINT:kbout:MIN:'%3.1lf KBps MIN ' ";
-$def[0] .= "GPRINT:kbout:MAX:'%3.1lf KBps MAX ' ";
-$def[0] .= "GPRINT:kbout:AVERAGE:'%3.1lf KBps AVG ' ";
-$def[0] .= "GPRINT:kbout:LAST:'%3.1lf KBps LAST\\n' ";
+$def[0] .= "AREA1:txdata{$_C_TXDATA}:'Bandwidth Out' ";
+$def[0] .= "GPRINT:txdata:MIN:'%3.1lf KBps MIN ' ";
+$def[0] .= "GPRINT:txdata:MAX:'%3.1lf KBps MAX ' ";
+$def[0] .= "GPRINT:txdata:AVERAGE:'%3.1lf KBps AVG ' ";
+$def[0] .= "GPRINT:txdata:LAST:'%3.1lf KBps LAST\\n' ";
 
 
 # Define signal graph
