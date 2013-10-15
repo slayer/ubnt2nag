@@ -10,20 +10,23 @@
 # Version 0.1
 
 
-# Colors
+# Colors table - http://html-color-codes.info/Cvetovye-kody-HTML/
+#
 $_C_WARNRULE  = '#FFFF00';
 $_C_CRITRULE  = '#FF0000';
+#
+$_C_SIGNAL    = '#04B4AE';
+$_C_NOISE     = '#B40431';
+$_C_CCQ       = '#DF7401';
+$_C_RXRATE    = '#00FF40';
+$_C_TXRATE    = '#2E64FE';
+$_C_RXDATA    = '#00FF40';
+$_C_TXDATA    = '#2E64FE';
+#
 $_C_LINE      = '#000000';
-$_C_SIGNAL    = '#256AEF';
-$_C_NOISE     = '#a00000';
-$_C_CCQ       = '#FF00FF';
 $_C_AQUALITY  = '#ff00ff';
 $_C_ACAPACITY = '#000099';
-$_C_RXRATE    = '#FFEEFF';
-$_C_TXRATE    = '#FF00FF';
-$_C_RXDATA    = '#04B431';
-#$_C_TXDATA   = '#000099';
-$_C_TXDATA    = '#256aef';
+
 
 # Data sources
 $_RXDATA    = $this->DS[0];
