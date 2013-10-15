@@ -20,10 +20,8 @@ $_C_NOISE     = '#B40431';
 $_C_CCQ       = '#DF7401';
 $_C_RXRATE    = '#00FF40';
 $_C_TXRATE    = '#2E64FE';
-#$_C_RXDATA    = '#00FF40';
-#$_C_TXDATA    = '#2E64FE';
-$_C_RXDATA    = '#003300';
-$_C_TXDATA    = '#00ff00';
+$_C_RXDATA    = '#00FF40';
+$_C_TXDATA    = '#2E64FE';
 $_C_AVERAGE   = '#FF0000';
 $_C_USERS     = '#642EFE';
 #
