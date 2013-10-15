@@ -58,11 +58,11 @@ $def[0] .= "GPRINT:kbin:MAX:'%3.1lf KBps MAX ' ";
 $def[0] .= "GPRINT:kbin:AVERAGE:'%3.1lf KBps AVG ' ";
 $def[0] .= "GPRINT:kbin:LAST:'%3.1lf KBps LAST\\n' ";
 
-$def[0] .= "LINE1:txdata{$_C_TXDATA}:'Bandwidth Out' ";
-$def[0] .= "GPRINT:txdata:MIN:'%3.1lf KBps MIN ' ";
-$def[0] .= "GPRINT:txdata:MAX:'%3.1lf KBps MAX ' ";
-$def[0] .= "GPRINT:txdata:AVERAGE:'%3.1lf KBps AVG ' ";
-$def[0] .= "GPRINT:txdata:LAST:'%3.1lf KBps LAST\\n' ";
+$def[0] .= "LINE1:kbout{$_C_TXDATA}:'Bandwidth Out' ";
+$def[0] .= "GPRINT:kbout:MIN:'%3.1lf KBps MIN ' ";
+$def[0] .= "GPRINT:kbout:MAX:'%3.1lf KBps MAX ' ";
+$def[0] .= "GPRINT:kbout:AVERAGE:'%3.1lf KBps AVG ' ";
+$def[0] .= "GPRINT:kbout:LAST:'%3.1lf KBps LAST\\n' ";
 
 
 # Define signal graph
