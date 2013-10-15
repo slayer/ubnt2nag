@@ -112,7 +112,7 @@ $def[1] .= "LINE1:noiseU{$_C_LINE} ";
 # Define connection graph
 #$ds_name[1] = "{$_CCQ['NAME']} {$_AQUALITY['NAME']} {$_ACAPACITY['NAME']}";
 $ds_name[2] = "{$_CCQ['NAME']}";
-$opt[2] = "--vertical-label 'Percent' --title '{$this->MACRO['DISP_HOSTNAME']} / {$this->MACRO['DISP_SERVICEDESC']} Connection' --lower-limit=0 ";
+$opt[2] = "--vertical-label 'Percent' --title '{$this->MACRO['DISP_HOSTNAME']} / {$this->MACRO['DISP_SERVICEDESC']} Quality' --lower-limit=0 ";
 
 $def[2]  = "DEF:ccq={$_CCQ['RRDFILE']}:{$_CCQ['DS']}:AVERAGE ";
 #$def[2] .= "DEF:aquality={$_AQUALITY['RRDFILE']}:{$_AQUALITY['DS']}:AVERAGE ";
@@ -165,14 +165,13 @@ $opt[4] = "--vertical-label 'Ps' --title '{$this->MACRO['DISP_HOSTNAME']} / {$th
 $def[4]  = "DEF:wcon={$_WCON['RRDFILE']}:{$_WCON['DS']}:AVERAGE ";
 $def[4] .= "DEF:lavg={$_LAVG['RRDFILE']}:{$_LAVG['DS']}:AVERAGE ";
 
-#$def[4] .= "LINE1:wcon{$_C_USERS}:'Users Connected' ";
 $def[4] .= "AREA:wcon{$_C_USERS}:'Connected Users' ";
 $def[4] .= "GPRINT:wcon:MIN:'%3.1lf Users MIN ' ";
 $def[4] .= "GPRINT:wcon:MAX:'%3.1lf Users MAX ' ";
 $def[4] .= "GPRINT:wcon:AVERAGE:'%3.1lf Users AVG ' ";
 $def[4] .= "GPRINT:wcon:LAST:'%3.1lf Users LAST\\n' ";
 
-$def[4] .= "LINE1:lavg{$_C_AVERAGE}:'Load CPU' ";
+$def[4] .= "AREA:lavg{$_C_AVERAGE}:'Load Average   ' ";
 $def[4] .= "GPRINT:lavg:MIN:'%3.1lf Load MIN ' ";
 $def[4] .= "GPRINT:lavg:MAX:'%3.1lf Load MAX ' ";
 $def[4] .= "GPRINT:lavg:AVERAGE:'%3.1lf Load AVG ' ";
