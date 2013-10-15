@@ -104,13 +104,13 @@ $def[2] .= "GPRINT:ccq:AVERAGE:'%3.0lf%% AVG ' ";
 $def[2] .= "GPRINT:ccq:LAST:'%3.0lf%% LAST\\n' ";
 
 if($this->MACRO['TIMET'] != ""){
-    $def[3] .= "VRULE:".$this->MACRO['TIMET']."#000000:\"Last Service Check \\n\" ";
+    $def[2] .= "VRULE:".$this->MACRO['TIMET']."#000000:\"Last Service Check \\n\" ";
 }
 if ($WARN[1] != "") {
-    $def[3] .= "HRULE:$WARN[1]#FF8C00:\"In-Traffic Warning on $WARN[1] \" ";
+    $def[2] .= "HRULE:$WARN[1]#FF8C00:\"In-Traffic Warning on $WARN[1] \" ";
 }
 if ($CRIT[1] != "") {
-    $def[3] .= "HRULE:$CRIT[1]#FF008C:\"In-Traffic Critical on $CRIT[1] \" ";
+    $def[2] .= "HRULE:$CRIT[1]#FF008C:\"In-Traffic Critical on $CRIT[1] \" ";
 }
 
 
