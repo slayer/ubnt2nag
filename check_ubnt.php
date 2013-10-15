@@ -132,7 +132,7 @@ $def[3] .= "GPRINT:txrate:MIN:'%7.2lf %Smin' ";
 
 $ds_name[4] = "Connected users";
 $opt[4] = "--vertical-label 'fucking people' --title '{$this->MACRO['DISP_HOSTNAME']}' --lower-limit=0 ";
-$def[4] = "DEF:users={$_USERS['RRDFILE']}:{$_USERS['DS']}:AVERAGE ";
+$def[4] = "DEF:users={$_WCON['RRDFILE']}:{$_WCON['DS']}:AVERAGE ";
 $def[4] .= "AREA:users{$_C_USERS}:'users' ";
 $def[4] .= "GPRINT:users:LAST:'%7.2lf %Slast' ";
 $def[4] .= "GPRINT:users:AVERAGE:'%7.2lf %Savg' ";
