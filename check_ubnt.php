@@ -30,6 +30,24 @@ $_C_AQUALITY  = '#ff00ff';
 $_C_ACAPACITY = '#000099';
 
 
+if ($VAL['WARN'] != "") {
+    $warning = $VAL['WARN'];
+}
+if ($VAL['CRIT'] != "") {
+    $critical = $VAL['CRIT'];
+}
+if ($VAL['UNIT'] == "%%") {
+    $vlabel = "%";
+    $upper = " --upper=101 ";
+    $lower = " --lower=0 ";
+}
+else {
+    $vlabel = $VAL['UNIT'];
+}
+
+
+
+
 # Data sources
 $_RXDATA    = $this->DS[0];
 $_TXDATA    = $this->DS[1];
