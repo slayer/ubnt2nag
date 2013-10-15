@@ -21,7 +21,7 @@ $_C_AQUALITY  = '#ff00ff';
 $_C_ACAPACITY = '#000099';
 $_C_RXRATE    = '#FFEEFF';
 $_C_TXRATE    = '#FF00FF';
-$_C_RXDATA    = '#00ff00';
+$_C_RXDATA    = '#04B431';
 #$_C_TXDATA   = '#000099';
 $_C_TXDATA    = '#256aef';
 
