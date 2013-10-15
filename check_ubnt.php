@@ -166,6 +166,10 @@ $def[3] .= "GPRINT:txrate:MAX:'%3.1lf Mbps MAX ' ";
 $def[3] .= "GPRINT:txrate:AVERAGE:'%3.1lf Mbps AVG ' ";
 $def[3] .= "GPRINT:txrate:LAST:'%3.1lf Mbps LAST\\n' ";
 
+if (isset($CRIT[3]) &amp;&amp; $CRIT[3] != "") {
+  $def[3] .= "HRULE:$CRIT[1]#FF0000:\"Critical ($NAME[1])\: " . $CRIT[3] . " " . $UNIT[3] . " \\n\" " ;
+}
+
 
 # Define data load
 $ds_name[4] = "{$_WCON['NAME']} {$_LAVG['NAME']}";
