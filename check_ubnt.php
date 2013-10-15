@@ -30,24 +30,6 @@ $_C_AQUALITY  = '#ff00ff';
 $_C_ACAPACITY = '#000099';
 
 
-if ($VAL['WARN'] != "") {
-    $warning = $VAL['WARN'];
-}
-if ($VAL['CRIT'] != "") {
-    $critical = $VAL['CRIT'];
-}
-if ($VAL['UNIT'] == "%%") {
-    $vlabel = "%";
-    $upper = " --upper=101 ";
-    $lower = " --lower=0 ";
-}
-else {
-    $vlabel = $VAL['UNIT'];
-}
-
-
-
-
 # Data sources
 $_RXDATA    = $this->DS[0];
 $_TXDATA    = $this->DS[1];
@@ -154,6 +136,15 @@ $def[2] .= "GPRINT:ccq:LAST:'%3.0lf%% LAST\\n' ";
 #$def[2] .= "GPRINT:acapacity:MAX:'%3.0lf%% MAX ' ";
 #$def[2] .= "GPRINT:acapacity:AVERAGE:'%3.0lf%% AVG ' ";
 #$def[2] .= "GPRINT:acapacity:LAST:'%3.0lf%% LAST\\n' ";
+
+if($WARN[2] != ""){
+    if($UNIT[1] == "%%"){ $UNIT[1] = "%"; };
+	$def[1] .= rrd::hrule($WARN[1], "#FFFF00", "Warning  ".$WARN[1].$UNIT[1]."\\n");
+}
+if($CRIT[2] != ""){
+    if($UNIT[1] == "%%"){ $UNIT[1] = "%"; };
+	$def[1] .= rrd::hrule($CRIT[1], "#FF0000", "Critical ".$CRIT[1].$UNIT[1]."\\n");
+}
 
 
 # Define rate graph
