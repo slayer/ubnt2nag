@@ -132,7 +132,7 @@ $opt[6] = "--vertical-label 'uptime, sec' --title '{$this->MACRO['DISP_HOSTNAME'
 $def[6] = "DEF:uptime={$_UPTIME['RRDFILE']}:{$_UPTIME['DS']}:AVERAGE ";
 ##$def[6] .= "CDEF:days=uptime,86400,/ ";
 $def[6] .= "AREA:uptime{$_C_UPTIME}:'sec' ";
-$def[6] .= "GPRINT:uptime:LAST:'%7.2lf %S last' ";
+$def[6] .= "GPRINT:uptime:LAST:'%7.2lf  last' ";
 $def[6] .= "GPRINT:uptime:AVERAGE:'%7.2lf %S avg' ";
 $def[6] .= "GPRINT:uptime:MAX:'%7.2lf %S max' ";
 
