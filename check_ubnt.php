@@ -7,7 +7,6 @@
 #
 # Colors helping table: http://html-color-codes.info/Cvetovye-kody-HTML/
 
-
 $_C_WARNRULE  = '#FFFF00';
 $_C_CRITRULE  = '#FF0000';
 $_C_LINE      = '#000000';
@@ -20,6 +19,7 @@ $_C_RXDATA    = '#00FF00';
 $_C_TXDATA    = '#2E64FE';
 $_C_AVERAGE   = '#FF0000';
 $_C_USERS     = '#642EFE';
+$_C_UPTIME    = '#DF7001';
 $_C_AQUALITY  = '#ff00ff';
 $_C_ACAPACITY = '#000099';
 
@@ -32,6 +32,7 @@ $_TXRATE    = $this->DS[5];
 $_CCQ       = $this->DS[6];
 $_WCON      = $this->DS[7];
 $_LAVG      = $this->DS[8];
+$_UPTIME    = $this->DS[8];
 
 $_SIGMIN = min ($_SIGNAL['MIN'], $_NOISE['MIN']);
 $_SIGMAX = max ($_SIGNAL['MAX'], $_NOISE['MAX']);
@@ -74,15 +75,15 @@ $def[1] .= "GPRINT:noiseU:MIN:'%7.2lf %Smin'\\n ";
 $def[1] .= "LINE1:signalU{$_C_LINE}:'' ";
 $def[1] .= "LINE1:noiseU{$_C_LINE} ";
 
-if($this->MACRO['TIMET'] != ""){
-  $def[1] .= "VRULE:".$this->MACRO['TIMET']."#000000:\"Last Service Check \\n\" ";
-}
-if ($WARN[1] != "") {
-  $def[1] .= "HRULE:$WARN[1]{$_C_WARNRULE}:\"In-Traffic Warning on $WARN[1] \" ";
-}
-if ($CRIT[1] != "") {
-  $def[1] .= "HRULE:$CRIT[1]{$_C_CRITRULE}:\"In-Traffic Critical on $CRIT[1] \" ";
-}
+#if($this->MACRO['TIMET'] != ""){
+#  $def[1] .= "VRULE:".$this->MACRO['TIMET']."#000000:\"Last Service Check \\n\" ";
+#}
+#if ($WARN[1] != "") {
+#  $def[1] .= "HRULE:$WARN[1]{$_C_WARNRULE}:\"In-Traffic Warning on $WARN[1] \" ";
+#}
+#if ($CRIT[1] != "") {
+#  $def[1] .= "HRULE:$CRIT[1]{$_C_CRITRULE}:\"In-Traffic Critical on $CRIT[1] \" ";
+#}
 
 $ds_name[2] = "Link quiality";
 $opt[2] = "--vertical-label 'quality, %' --title '{$this->MACRO['DISP_HOSTNAME']}' --lower-limit=0 ";
@@ -125,5 +126,14 @@ $def[5] .= "GPRINT:lavg:LAST:'%7.2lf %Slast' ";
 $def[5] .= "GPRINT:lavg:AVERAGE:'%7.2lf %Savg' ";
 $def[5] .= "GPRINT:lavg:MAX:'%7.2lf %Smax' ";
 $def[5] .= "GPRINT:lavg:MAX:'%7.2lf %Smin'\\n ";
+
+$ds_name[5] = "Uptime";
+$opt[5] = "--vertical-label 'uptime, sec' --title '{$this->MACRO['DISP_HOSTNAME']}' --lower-limit=0 ";
+$def[5] = "DEF:uptime={$_UPTIME['RRDFILE']}:{$_UPTIME['DS']}:AVERAGE ";
+$def[5] .= "AREA:lavg{$_C_UPTIME}:'sec' ";
+$def[5] .= "GPRINT:uptime:LAST:'%7.2lf %Slast' ";
+$def[5] .= "GPRINT:uptime:AVERAGE:'%7.2lf %Savg' ";
+$def[5] .= "GPRINT:uptime:MAX:'%7.2lf %Smax' ";
+$def[5] .= "GPRINT:uptime:MAX:'%7.2lf %Smin'\\n ";
 
 ?>
