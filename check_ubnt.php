@@ -12,8 +12,8 @@ $_C_WARNRULE  = '#FFFF00';
 $_C_CRITRULE  = '#FF0000';
 $_C_LINE      = '#000000';
 $_C_SIGNAL    = '#B40431';
-$_C_NOISE     = '#DF7401';
-$_C_CCQ       = '#04B4AE';
+$_C_NOISE     = '#04B4AE';
+$_C_CCQ       = '#DF7401';
 $_C_RXRATE    = '#00FF40';
 $_C_TXRATE    = '#2E64FE';
 $_C_RXDATA    = '#00FF00';
@@ -36,7 +36,6 @@ $_LAVG      = $this->DS[8];
 # Calculations
 #$_SIGMIN = min ($_SIGNAL['MIN'], $_NOISE['MIN']);
 #$_SIGMAX = max ($_SIGNAL['MAX'], $_NOISE['MAX']);
-
 
 $ds_name[0] = "Network Interface Traffic";
 $opt[0] = "--vertical-label 'traffic, bps' -b 1024 --title '{$this->MACRO['DISP_HOSTNAME']}' --lower-limit=0 ";
@@ -76,20 +75,6 @@ $def[1] .= "GPRINT:noiseU:LAST:'%7.2lf %Slast' ";
 $def[1] .= "GPRINT:noiseU:AVERAGE:'%7.2lf %Savg' ";
 $def[1] .= "GPRINT:noiseU:MAX:'%7.2lf %Smax' ";
 $def[1] .= "GPRINT:noiseU:MIN:'%7.2lf %Smin'\\n ";
-
-#$def[1] .= "LINE1:signalU{$_C_SIGNAL}:'' ";
-#$def[1] .= "AREA:signalI{$_C_SIGNAL}:'':STACK ";
-#$def[1] .= "GPRINT:signalU:MIN:'%3.0lf dBm MIN ' ";
-#$def[1] .= "GPRINT:signalU:MAX:'%3.0lf dBm MAX ' ";
-#$def[1] .= "GPRINT:signalU:AVERAGE:'%3.0lf dBm AVG ' ";
-#$def[1] .= "GPRINT:signalU:LAST:'%3.0lf dBm LAST\\n' ";
-
-#$def[1] .= "LINE1:noiseU{$_C_NOISE}:'Noise         ' ";
-#$def[1] .= "AREA:noiseI{$_C_NOISE}:'':STACK ";
-#$def[1] .= "GPRINT:noiseU:MIN:'%3.0lf dBm MIN ' ";
-#$def[1] .= "GPRINT:noiseU:MAX:'%3.0lf dBm MAX ' ";
-#$def[1] .= "GPRINT:noiseU:AVERAGE:'%3.0lf dBm AVG ' ";
-#$def[1] .= "GPRINT:noiseU:LAST:'%3.0lf dBm LAST\\n' ";
 
 $def[1] .= "LINE1:signalU{$_C_LINE}:'' ";
 $def[1] .= "LINE1:noiseU{$_C_LINE} ";
