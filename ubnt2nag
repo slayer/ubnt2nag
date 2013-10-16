@@ -97,7 +97,8 @@ class UBNT2NAG
           "'signal'=#{h['signal']};-78;-83;-100;0'noise'=#{h['noise']};-91;-89;" +
           "-100;0'rxrate'=#{h['wlanRxRate']};30;10;0;270'txrate'=#{h['wlanTxRate']}" +
           ";30;10;0;270'ccq'=#{ccq h['ccq']}%;90;85;;'wcon'=#{h['wlanConnections']};20" +
-          ";25;0;50'lavg'=#{h['loadavg']};5;10;0;30'uptime'=#{h['uptime']};300;100;0;1000"
+          ";25;0;50'lavg'=#{h['loadavg']};5;10;0;30'uptime'=#{h['uptime']};300;100;0;1000 |" +
+          " Кентовский Кенток Кентокъевич, active, 152uah., 15.05.2013 "
   end
 
   def run
