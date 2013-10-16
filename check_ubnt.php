@@ -4,6 +4,8 @@
 #
 # By Zig Fisher
 # http://blog.flyrouter.net
+#
+# Colors helping table: http://html-color-codes.info/Cvetovye-kody-HTML/
 
 
 $_C_WARNRULE  = '#FFFF00';
@@ -52,31 +54,59 @@ $def[0] .= "GPRINT:obits:AVERAGE:'%7.2lf %Savg' " ;
 $def[0] .= "GPRINT:obits:MAX:'%7.2lf %Smax\\n' ";
 
 
+# Define signal graph
+$ds_name[1] = "{$_SIGNAL['NAME']} {$_NOISE['NAME']}";
+$opt[1] = "--vertical-label 'dBm' --title '{$this->MACRO['DISP_HOSTNAME']} / {$this->MACRO['DISP_SERVICEDESC']} Signal' --alt-y-grid ";
 
-$ds_name[1] = "Signal & Noise";
-$opt[1] = "--vertical-label 'signal/noise, dBm' --title '{$this->MACRO['DISP_HOSTNAME']}' --alt-y-grid ";
 $def[1]  = "DEF:signal={$_SIGNAL['RRDFILE']}:{$_SIGNAL['DS']}:AVERAGE ";
 $def[1] .= "DEF:noise={$_NOISE['RRDFILE']}:{$_NOISE['DS']}:AVERAGE ";
-
 $def[1] .= "CDEF:signalU=signal,0,EQ,NEGINF,signal,IF ";
 $def[1] .= "CDEF:noiseU=noise,0,EQ,UNKN,noise,IF ";
-
 $def[1] .= "CDEF:signalI=signalU,UN,UNKN,NEGINF,IF ";
 $def[1] .= "CDEF:noiseI=noiseU,UN,UNKN,NEGINF,IF ";
 
-$def[1] .= "LINE1:signalU{$_C_SIGNAL}:'signal' ";
-$def[1] .= "AREA:signalI{$_C_SIGNAL}:'' ";
-$def[1] .= "GPRINT:signalU:LAST:'%7.2lf %Slast' ";
-$def[1] .= "GPRINT:signalU:AVERAGE:'%7.2lf %Savg' ";
-$def[1] .= "GPRINT:signalU:MAX:'%7.2lf %Smax' ";
-$def[1] .= "GPRINT:signalU:MIN:'%7.2lf %Smin'\\n ";
+$def[1] .= "LINE1:signalU{$_C_SIGNAL}:'Signal        ' ";
+$def[1] .= "AREA:signalI{$_C_SIGNAL}:'':STACK ";
+$def[1] .= "GPRINT:signalU:MIN:'%3.0lf dBm MIN ' ";
+$def[1] .= "GPRINT:signalU:MAX:'%3.0lf dBm MAX ' ";
+$def[1] .= "GPRINT:signalU:AVERAGE:'%3.0lf dBm AVG ' ";
+$def[1] .= "GPRINT:signalU:LAST:'%3.0lf dBm LAST\\n' ";
 
-$def[1] .= "LINE1:noiseI{$_C_NOISE}:'noise' ";
-$def[1] .= "AREA:noiseU{$_C_NOISE}:'' ";
-$def[1] .= "GPRINT:noiseU:LAST:'%7.2lf %Slast' ";
-$def[1] .= "GPRINT:noiseU:AVERAGE:'%7.2lf %Savg' ";
-$def[1] .= "GPRINT:noiseU:MAX:'%7.2lf %Smax' ";
-$def[1] .= "GPRINT:noiseU:MIN:'%7.2lf %Smin'\\n ";
+$def[1] .= "LINE1:noiseU{$_C_NOISE}:'Noise         ' ";
+$def[1] .= "AREA:noiseI{$_C_NOISE}:'':STACK ";
+$def[1] .= "GPRINT:noiseU:MIN:'%3.0lf dBm MIN ' ";
+$def[1] .= "GPRINT:noiseU:MAX:'%3.0lf dBm MAX ' ";
+$def[1] .= "GPRINT:noiseU:AVERAGE:'%3.0lf dBm AVG ' ";
+$def[1] .= "GPRINT:noiseU:LAST:'%3.0lf dBm LAST\\n' ";
+
+$def[1] .= "LINE1:signalU{$_C_LINE}:'' ";
+$def[1] .= "LINE1:noiseU{$_C_LINE} ";
+
+
+#$ds_name[1] = "Signal & Noise";
+#$opt[1] = "--vertical-label 'signal/noise, dBm' --title '{$this->MACRO['DISP_HOSTNAME']}' --alt-y-grid ";
+#$def[1]  = "DEF:signal={$_SIGNAL['RRDFILE']}:{$_SIGNAL['DS']}:AVERAGE ";
+#$def[1] .= "DEF:noise={$_NOISE['RRDFILE']}:{$_NOISE['DS']}:AVERAGE ";
+
+#$def[1] .= "CDEF:signalU=signal,0,EQ,NEGINF,signal,IF ";
+#$def[1] .= "CDEF:noiseU=noise,0,EQ,UNKN,noise,IF ";
+
+#$def[1] .= "CDEF:signalI=signalU,UN,UNKN,NEGINF,IF ";
+#$def[1] .= "CDEF:noiseI=noiseU,UN,UNKN,NEGINF,IF ";
+
+#$def[1] .= "LINE1:signalU{$_C_SIGNAL}:'signal' ";
+#$def[1] .= "AREA:signalI{$_C_SIGNAL}:'' ";
+#$def[1] .= "GPRINT:signalU:LAST:'%7.2lf %Slast' ";
+#$def[1] .= "GPRINT:signalU:AVERAGE:'%7.2lf %Savg' ";
+#$def[1] .= "GPRINT:signalU:MAX:'%7.2lf %Smax' ";
+#$def[1] .= "GPRINT:signalU:MIN:'%7.2lf %Smin'\\n ";
+
+#$def[1] .= "LINE1:noiseI{$_C_NOISE}:'noise' ";
+#$def[1] .= "AREA:noiseU{$_C_NOISE}:'' ";
+#$def[1] .= "GPRINT:noiseU:LAST:'%7.2lf %Slast' ";
+#$def[1] .= "GPRINT:noiseU:AVERAGE:'%7.2lf %Savg' ";
+#$def[1] .= "GPRINT:noiseU:MAX:'%7.2lf %Smax' ";
+#$def[1] .= "GPRINT:noiseU:MIN:'%7.2lf %Smin'\\n ";
 
 #if($this->MACRO['TIMET'] != ""){
 #  $def[1] .= "VRULE:".$this->MACRO['TIMET']."#000000:\"Last Service Check \\n\" ";
