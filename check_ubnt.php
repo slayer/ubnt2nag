@@ -141,6 +141,6 @@ $def[6] .= "GPRINT:days:MAX:'%7.2lf %S min'\\n ";
 $def[6] .= "LINE1:days{$_C_UPTIME}:'' ";
 
 #$def[6] .=  GRADIENT("days", "228b22", "adff2f", "uptime", 20) ;
-#$def[6] .=  GRADIENT("days", "00ff2f", "00ffff", "uptime", 20) ;
+$def[6] .=  "GRADIENT:days:#00ff2f:#00ffff:'uptime':20" ;
 
 ?>
