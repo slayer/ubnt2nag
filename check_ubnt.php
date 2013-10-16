@@ -128,7 +128,7 @@ $def[5] .= "GPRINT:lavg:MAX:'%7.2lf %S max' ";
 $def[5] .= "GPRINT:lavg:MIN:'%7.2lf %S min'\\n ";
 
 $ds_name[6] = "Uptime";
-$opt[6] = "--vertical-label 'days' --title '{$this->MACRO['DISP_HOSTNAME']}' --rigid --base=1000 --alt-autoscale-max --lower-limit=0 --units-exponent=0  ";
+$opt[6] = "--vertical-label 'days' --title '{$this->MACRO['DISP_HOSTNAME']}' --lower-limit=0  ";
 $def[6] = "DEF:uptime={$_UPTIME['RRDFILE']}:{$_UPTIME['DS']}:AVERAGE ";
 $def[6] .= "CDEF:days=uptime,86400,/ ";
 $def[6] .= "AREA:days{$_C_UPTIME}:'uptime' ";
