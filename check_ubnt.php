@@ -127,13 +127,13 @@ $def[5] .= "GPRINT:lavg:AVERAGE:'%7.2lf %Savg' ";
 $def[5] .= "GPRINT:lavg:MAX:'%7.2lf %Smax' ";
 $def[5] .= "GPRINT:lavg:MAX:'%7.2lf %Smin'\\n ";
 
-$ds_name[5] = "Uptime";
-$opt[5] = "--vertical-label 'uptime, sec' --title '{$this->MACRO['DISP_HOSTNAME']}' --lower-limit=0 ";
-$def[5] = "DEF:uptime={$_UPTIME['RRDFILE']}:{$_UPTIME['DS']}:AVERAGE ";
-$def[5] .= "AREA:lavg{$_C_UPTIME}:'sec' ";
-$def[5] .= "GPRINT:uptime:LAST:'%7.2lf %Slast' ";
-$def[5] .= "GPRINT:uptime:AVERAGE:'%7.2lf %Savg' ";
-$def[5] .= "GPRINT:uptime:MAX:'%7.2lf %Smax' ";
-$def[5] .= "GPRINT:uptime:MAX:'%7.2lf %Smin'\\n ";
+$ds_name[6] = "Uptime";
+$opt[6] = "--vertical-label 'uptime, sec' --title '{$this->MACRO['DISP_HOSTNAME']}' --lower-limit=0 ";
+$def[6] = "DEF:uptime={$_UPTIME['RRDFILE']}:{$_UPTIME['DS']}:AVERAGE ";
+$def[6] .= "AREA:lavg{$_C_UPTIME}:'sec' ";
+$def[6] .= "GPRINT:uptime:LAST:'%7.2lf %Slast' ";
+$def[6] .= "GPRINT:uptime:AVERAGE:'%7.2lf %Savg' ";
+$def[6] .= "GPRINT:uptime:MAX:'%7.2lf %Smax' ";
+$def[6] .= "GPRINT:uptime:MAX:'%7.2lf %Smin'\\n ";
 
 ?>
