@@ -26,15 +26,17 @@ Main features
 News
 ====
 
-12.10.2013 Release 0.2
+16.10.2013 Release 0.3
 
-* x
-* y
+* add pnp4nagios graphics template - uptime, connected users, load average
+
+14.10.2013 Release 0.2
+
+* add pnp4nagios graphics template - traffic, signal and noise, wifi ccq, wifi rate
 
 12.10.2013 Release 0.1
 
-* x
-* y
+* initial
 
 
 Install complex
@@ -75,9 +77,10 @@ Todo notes
 
 	1. Если отсутствует параметр lanSpeed, то вместо скорости писать "Off"
 	2. В параметре platform (и других) заменять пробелы на подчеркивания
-	3. Обрабатывать переменную uptime как 0d:0h:0m  (дни, часы, минуты)
-	4. Урезать вывод версии прошивки на три октета  XM.ar7240.v5.5.0.02.ubnt-ic.12536.130323.1646 до XM.ar7240.v5.5.0.02.ubnt-ic
+	3. Обрабатывать переменную uptime как 0d:0h:0m (дни, часы, минуты)
+	4. Урезать вывод версии прошивки на три октета XM.ar7240.v5.5.0.02.ubnt-ic.12536.130323.1646 до XM.ar7240.v5.5.0.02.ubnt-ic
 	5. Добавить переменную ping до сервера, указываемого так-же в командной строке
 	6. Закоментировать в коде использование status_cgi и переключение между режимами
 	7. Разобраться с цветовыми схемами в rrd, GRADIENT и т.д.
+	8. Обрагородить скрипт запуска
 
