@@ -76,8 +76,8 @@ $def[1] .= "GPRINT:noiseU:AVERAGE:'%7.2lf %Savg' ";
 $def[1] .= "GPRINT:noiseU:MAX:'%7.2lf %Smax' ";
 $def[1] .= "GPRINT:noiseU:MIN:'%7.2lf %Smin'\\n ";
 
-$def[1] .= "LINE1:signalU{$_C_LINE}:'' ";
-$def[1] .= "LINE1:noiseU{$_C_LINE} ";
+#$def[1] .= "LINE1:signalU{$_C_LINE}:'' ";
+#$def[1] .= "LINE1:noiseU{$_C_LINE} ";
 
 #if($this->MACRO['TIMET'] != ""){
 #  $def[1] .= "VRULE:".$this->MACRO['TIMET']."#000000:\"Last Service Check \\n\" ";
