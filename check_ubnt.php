@@ -62,16 +62,16 @@ $def[1] .= "CDEF:signalI=signalU,UN,UNKN,NEGINF,IF ";
 $def[1] .= "CDEF:noiseI=noiseU,UN,UNKN,NEGINF,IF ";
 $def[1] .= "LINE1:signalU{$_C_SIGNAL}:'signal' ";
 $def[1] .= "AREA:signalI{$_C_SIGNAL}:'':STACK ";
-$def[1] .= "GPRINT:signalU:LAST:'%7.2lf dBm last' ";
-$def[1] .= "GPRINT:signalU:AVERAGE:'%7.2lf dBm avg' ";
-$def[1] .= "GPRINT:signalU:MAX:'%7.2lf dBm max' ";
-$def[1] .= "GPRINT:signalU:MIN:'%7.2lf dBm min'\\n ";
+$def[1] .= "GPRINT:signalU:LAST:'%7.2lf last' ";
+$def[1] .= "GPRINT:signalU:AVERAGE:'%7.2lf avg' ";
+$def[1] .= "GPRINT:signalU:MAX:'%7.2lf max' ";
+$def[1] .= "GPRINT:signalU:MIN:'%7.2lf min'\\n ";
 $def[1] .= "LINE1:noiseU{$_C_NOISE}:'noise ' ";
 $def[1] .= "AREA:noiseI{$_C_NOISE}:'':STACK ";
-$def[1] .= "GPRINT:noiseU:LAST:'%7.2lf dBm last' ";
-$def[1] .= "GPRINT:noiseU:AVERAGE:'%7.2lf dBm avg' ";
-$def[1] .= "GPRINT:noiseU:MAX:'%7.2lf dBm max' ";
-$def[1] .= "GPRINT:noiseU:MIN:'%7.2lf dBm min'\\n ";
+$def[1] .= "GPRINT:noiseU:LAST:'%7.2lf last' ";
+$def[1] .= "GPRINT:noiseU:AVERAGE:'%7.2lf avg' ";
+$def[1] .= "GPRINT:noiseU:MAX:'%7.2lf max' ";
+$def[1] .= "GPRINT:noiseU:MIN:'%7.2lf min'\\n ";
 $def[1] .= "LINE1:signalU{$_C_LINE}:'' ";
 $def[1] .= "LINE1:noiseU{$_C_LINE} ";
 
@@ -134,6 +134,6 @@ $def[6] .= "CDEF:days=uptime,86400,/ ";
 $def[6] .= "AREA:days{$_C_UPTIME}:'day' ";
 $def[6] .= "GPRINT:days:LAST:'%7.2lf last' ";
 $def[6] .= "GPRINT:days:AVERAGE:'%7.2lf avg' ";
-$def[6] .= "GPRINT:days:MAX:'%7.2lf max' ";
+$def[6] .= "GPRINT:days:MAX:'%7.2lf max'\\n ";
 
 ?>
