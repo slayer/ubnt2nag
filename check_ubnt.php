@@ -33,9 +33,8 @@ $_CCQ       = $this->DS[6];
 $_WCON      = $this->DS[7];
 $_LAVG      = $this->DS[8];
 
-# Calculations
-#$_SIGMIN = min ($_SIGNAL['MIN'], $_NOISE['MIN']);
-#$_SIGMAX = max ($_SIGNAL['MAX'], $_NOISE['MAX']);
+$_SIGMIN = min ($_SIGNAL['MIN'], $_NOISE['MIN']);
+$_SIGMAX = max ($_SIGNAL['MAX'], $_NOISE['MAX']);
 
 $ds_name[0] = "Network Interface Traffic";
 $opt[0] = "--vertical-label 'traffic, bps' -b 1024 --title '{$this->MACRO['DISP_HOSTNAME']}' --lower-limit=0 ";
@@ -56,39 +55,34 @@ $ds_name[1] = "Signal & Noise";
 $opt[1] = "--vertical-label 'signal/noise, dBm' --title '{$this->MACRO['DISP_HOSTNAME']}' --alt-y-grid ";
 $def[1]  = "DEF:signal={$_SIGNAL['RRDFILE']}:{$_SIGNAL['DS']}:AVERAGE ";
 $def[1] .= "DEF:noise={$_NOISE['RRDFILE']}:{$_NOISE['DS']}:AVERAGE ";
-
 $def[1] .= "CDEF:signalU=signal,0,EQ,NEGINF,signal,IF ";
 $def[1] .= "CDEF:noiseU=noise,0,EQ,UNKN,noise,IF ";
 $def[1] .= "CDEF:signalI=signalU,UN,UNKN,NEGINF,IF ";
 $def[1] .= "CDEF:noiseI=noiseU,UN,UNKN,NEGINF,IF ";
-
 $def[1] .= "LINE1:signalU{$_C_SIGNAL}:'signal' ";
 $def[1] .= "AREA:signalI{$_C_SIGNAL}:'':STACK ";
 $def[1] .= "GPRINT:signalU:LAST:'%7.2lf %Slast' ";
 $def[1] .= "GPRINT:signalU:AVERAGE:'%7.2lf %Savg' ";
 $def[1] .= "GPRINT:signalU:MAX:'%7.2lf %Smax' ";
 $def[1] .= "GPRINT:signalU:MIN:'%7.2lf %Smin'\\n ";
-
 $def[1] .= "LINE1:noiseU{$_C_NOISE}:'noise' ";
 $def[1] .= "AREA:noiseI{$_C_NOISE}:'':STACK ";
 $def[1] .= "GPRINT:noiseU:LAST:'%7.2lf %Slast' ";
 $def[1] .= "GPRINT:noiseU:AVERAGE:'%7.2lf %Savg' ";
 $def[1] .= "GPRINT:noiseU:MAX:'%7.2lf %Smax' ";
 $def[1] .= "GPRINT:noiseU:MIN:'%7.2lf %Smin'\\n ";
+$def[1] .= "LINE1:signalU{$_C_LINE}:'' ";
+$def[1] .= "LINE1:noiseU{$_C_LINE} ";
 
-#$def[1] .= "LINE1:signalU{$_C_LINE}:'' ";
-#$def[1] .= "LINE1:noiseU{$_C_LINE} ";
-
-#if($this->MACRO['TIMET'] != ""){
-#  $def[1] .= "VRULE:".$this->MACRO['TIMET']."#000000:\"Last Service Check \\n\" ";
-#}
-#if ($WARN[1] != "") {
-#  $def[1] .= "HRULE:$WARN[1]{$_C_WARNRULE}:\"In-Traffic Warning on $WARN[1] \" ";
-#}
-#if ($CRIT[1] != "") {
-#  $def[1] .= "HRULE:$CRIT[1]{$_C_CRITRULE}:\"In-Traffic Critical on $CRIT[1] \" ";
-#}
-
+if($this->MACRO['TIMET'] != ""){
+  $def[1] .= "VRULE:".$this->MACRO['TIMET']."#000000:\"Last Service Check \\n\" ";
+}
+if ($WARN[1] != "") {
+  $def[1] .= "HRULE:$WARN[1]{$_C_WARNRULE}:\"In-Traffic Warning on $WARN[1] \" ";
+}
+if ($CRIT[1] != "") {
+  $def[1] .= "HRULE:$CRIT[1]{$_C_CRITRULE}:\"In-Traffic Critical on $CRIT[1] \" ";
+}
 
 $ds_name[2] = "Link quiality";
 $opt[2] = "--vertical-label 'quality, %' --title '{$this->MACRO['DISP_HOSTNAME']}' --lower-limit=0 ";
