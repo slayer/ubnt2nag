@@ -130,7 +130,7 @@ $def[5] .= "GPRINT:lavg:MAX:'%7.2lf %S min'\\n ";
 $ds_name[6] = "Uptime";
 $opt[6] = "--vertical-label 'days' --title '{$this->MACRO['DISP_HOSTNAME']}' --slope-mode ";
 $def[6] = "DEF:uptime={$_UPTIME['RRDFILE']}:{$_UPTIME['DS']}:AVERAGE ";
-$def[0] .= "CDEF:days=minutes,60,/,24,/ ";
+$def[6] .= "CDEF:days=minutes,60,/,24,/ ";
 
 $def[6] .= "AREA:days{$_C_UPTIME}:'sec' ";
 $def[6] .= "GPRINT:days:LAST:'%7.2lf %S last' ";
