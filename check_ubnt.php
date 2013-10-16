@@ -131,15 +131,16 @@ $ds_name[6] = "Uptime";
 $opt[6] = "--vertical-label 'days' --title '{$this->MACRO['DISP_HOSTNAME']}' --slope-mode ";
 $def[6] = "DEF:uptime={$_UPTIME['RRDFILE']}:{$_UPTIME['DS']}:AVERAGE ";
 $def[0] .= "CDEF:days=minutes,60,/,24,/ ";
-#$def[6] .= "AREA:uptime{$_C_UPTIME}:'sec' ";
-#$def[6] .= "GPRINT:uptime:LAST:'%7.2lf %S last' ";
-#$def[6] .= "GPRINT:uptime:AVERAGE:'%7.2lf %S avg' ";
-#$def[6] .= "GPRINT:uptime:MAX:'%7.2lf %S max' ";
-#$def[6] .= "GPRINT:uptime:MAX:'%7.2lf %S min'\\n ";
+
+$def[6] .= "AREA:days{$_C_UPTIME}:'sec' ";
+$def[6] .= "GPRINT:days:LAST:'%7.2lf %S last' ";
+$def[6] .= "GPRINT:days:AVERAGE:'%7.2lf %S avg' ";
+$def[6] .= "GPRINT:days:MAX:'%7.2lf %S max' ";
+$def[6] .= "GPRINT:days:MAX:'%7.2lf %S min'\\n ";
 
 #$def[6] .=  GRADIENT("days", "228b22", "adff2f", "uptime", 20) ;
-$def[6] .=  GRADIENT("days", "00ff2f", "00ffff", "uptime", 20) ;
-$def[6] .=  GPRINT("days", array("last", "avg", "max"), "%6.2lf days") ;
-$def[6] .=  LINE1("days", "#000000")
+#$def[6] .=  GRADIENT("days", "00ff2f", "00ffff", "uptime", 20) ;
+#$def[6] .=  GPRINT("days", array("last", "avg", "max"), "%6.2lf days") ;
+#$def[6] .=  LINE1("days", "#000000")
 
 ?>
