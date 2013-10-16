@@ -91,7 +91,7 @@ class UBNT2NAG
       end
     end
     puts "UBNT OK: #{h['deviceName']}, #{h['deviceId']}, #{h['essid']}," +
-          " #{h['freq']}, #{h['platform']}, #{h['lanSpeed']}, #{h['firmwareVersion']}, 0d:0h:1m |" +
+          " #{h['freq']}, #{h['platform']}, #{h['lanSpeed']}, 0d:0h:1m, #{h['firmwareVersion']} |" +
           " 'rxdata'=#{h['wlanRxBytes']}c;;;;'txdata'=#{h['wlanTxBytes']}c;;;;" +
           "'signal'=#{h['signal']};-78;-83;-100;0'noise'=#{h['noise']};-91;-89;" +
           "-100;0'rxrate'=#{h['wlanRxRate']};30;10;0;270'txrate'=#{h['wlanTxRate']}" +
