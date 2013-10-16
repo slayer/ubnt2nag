@@ -116,7 +116,7 @@ $def[4] .= "AREA:users{$_C_USERS}:'users' ";
 $def[4] .= "GPRINT:users:LAST:'%7.2lf %S last' ";
 $def[4] .= "GPRINT:users:AVERAGE:'%7.2lf %S avg' ";
 $def[4] .= "GPRINT:users:MAX:'%7.2lf %S max' ";
-$def[4] .= "GPRINT:users:MAX:'%7.2lf %S min'\\n ";
+$def[4] .= "GPRINT:users:MIN:'%7.2lf %S min'\\n ";
 
 $ds_name[5] = "Load average";
 $opt[5] = "--vertical-label 'usage system' --title '{$this->MACRO['DISP_HOSTNAME']}' --lower-limit=0 ";
@@ -125,18 +125,15 @@ $def[5] .= "AREA:lavg{$_C_AVERAGE}:'load' ";
 $def[5] .= "GPRINT:lavg:LAST:'%7.2lf %S last' ";
 $def[5] .= "GPRINT:lavg:AVERAGE:'%7.2lf %S avg' ";
 $def[5] .= "GPRINT:lavg:MAX:'%7.2lf %S max' ";
-$def[5] .= "GPRINT:lavg:MAX:'%7.2lf %S min'\\n ";
+$def[5] .= "GPRINT:lavg:MIN:'%7.2lf %S min'\\n ";
 
 $ds_name[6] = "Uptime";
-$opt[6] = "--vertical-label 'days' --title '{$this->MACRO['DISP_HOSTNAME']}' --slope-mode ";
+$opt[6] = "--vertical-label 'days' --title '{$this->MACRO['DISP_HOSTNAME']}' --rigid --base=1000 --alt-autoscale-max --lower-limit=0 --units-exponent=0  ";
 $def[6] = "DEF:uptime={$_UPTIME['RRDFILE']}:{$_UPTIME['DS']}:AVERAGE ";
-$def[6] .= "CDEF:days=uptime,60,/,24,/ ";
-$def[6] .= "AREA:days{$_C_UPTIME}:'sec' ";
+$def[6] .= "CDEF:days=uptime,86400,/ ";
+$def[6] .= "AREA:days{$_C_UPTIME}:'uptime' ";
 $def[6] .= "GPRINT:days:LAST:'%7.2lf %S last' ";
 $def[6] .= "GPRINT:days:AVERAGE:'%7.2lf %S avg' ";
 $def[6] .= "GPRINT:days:MAX:'%7.2lf %S max' ";
-$def[6] .= "GPRINT:days:MAX:'%7.2lf %S min'\\n ";
-#$def[6] .= "LINE1:days{$_C_UPTIME}:'' ";
-#$def[6] .= "GRADIENT:days:#00ff2f:#00ffff:'uptime':20" ;
 
 ?>
