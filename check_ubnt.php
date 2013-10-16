@@ -32,7 +32,7 @@ $_TXRATE    = $this->DS[5];
 $_CCQ       = $this->DS[6];
 $_WCON      = $this->DS[7];
 $_LAVG      = $this->DS[8];
-$_UPTIME    = $this->DS[8];
+$_UPTIME    = $this->DS[9];
 
 $_SIGMIN = min ($_SIGNAL['MIN'], $_NOISE['MIN']);
 $_SIGMAX = max ($_SIGNAL['MAX'], $_NOISE['MAX']);

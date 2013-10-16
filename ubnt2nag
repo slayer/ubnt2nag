@@ -80,6 +80,7 @@ class UBNT2NAG
 
   def mca_status
     stdout = ssh_exec "/usr/sbin/mca-status"
+    # ping -q -c 1 -W 1 8.8.8.8 | grep 'round-trip' | tr '/=' ' ' | awk '{print "ping="$6}'
     lines = stdout.split("\n")
     h = {}
     lines.each do |line|
