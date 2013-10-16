@@ -137,7 +137,7 @@ $def[6] .= "GPRINT:days:LAST:'%7.2lf %S last' ";
 $def[6] .= "GPRINT:days:AVERAGE:'%7.2lf %S avg' ";
 $def[6] .= "GPRINT:days:MAX:'%7.2lf %S max' ";
 $def[6] .= "GPRINT:days:MAX:'%7.2lf %S min'\\n ";
-$def[6] .= "GPRINT:days:array('LAST', 'AVERAGE', 'MAX'), '%6.2lf days')" ;
+#$def[6] .= "GPRINT:days:array('LAST', 'AVERAGE', 'MAX'), '%6.2lf days')" ;
 $def[6] .= "LINE1:days{$_C_UPTIME}:'' ";
 
 #$def[6] .=  GRADIENT("days", "228b22", "adff2f", "uptime", 20) ;
