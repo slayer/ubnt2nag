@@ -11,8 +11,8 @@
 $_C_WARNRULE  = '#FFFF00';
 $_C_CRITRULE  = '#FF0000';
 $_C_LINE      = '#000000';
-$_C_SIGNAL    = '#B40431';
-$_C_NOISE     = '#04B4AE';
+$_C_SIGNAL    = '#04B4AE';
+$_C_NOISE     = '#B40431';
 $_C_CCQ       = '#DF7401';
 $_C_RXRATE    = '#00FF40';
 $_C_TXRATE    = '#2E64FE';
