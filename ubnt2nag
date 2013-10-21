@@ -78,6 +78,12 @@ class UBNT2NAG
           ";30%;'airmaxqual'=75%;;;;'airmaxcap'=71%;;;;"
   end
 
+  def p val
+    val = 'none' if val.nil? || val.size == 0
+    val.gsub!(' ', '_')
+    val
+  end
+
   def mca_status
     stdout = ssh_exec "/usr/sbin/mca-status"
     # ping -q -c 1 -W 1 8.8.8.8 | grep 'round-trip' | tr '/=' ' ' | awk '{print "ping="$6}'
@@ -91,10 +97,10 @@ class UBNT2NAG
         h[key] = value
       end
     end
-    puts "UBNT OK: #{h['deviceName']}, #{h['deviceId']}, #{h['essid']}," +
-          " #{h['freq']}, #{h['platform']}, #{h['lanSpeed']}, 0d:0h:1m, #{h['firmwareVersion']} |" +
-          " 'rxdata'=#{h['wlanRxBytes']}c;;;;'txdata'=#{h['wlanTxBytes']}c;;;;" +
-          "'signal'=#{h['signal']};-78;-83;-100;0'noise'=#{h['noise']};-91;-89;" +
+    puts "UBNT OK: #{p h['deviceName']}, #{p h['deviceId']}, #{p h['essid']}," +
+          " #{p h['freq']}, #{p h['platform']}, #{p h['lanSpeed']}, 0d:0h:1m, #{p h['firmwareVersion']} |" +
+          " 'rxdata'=#{p h['wlanRxBytes']}c;;;;'txdata'=#{h['wlanTxBytes']}c;;;;" +
+          "'signal'=#{p h['signal']};-78;-83;-100;0'noise'=#{h['noise']};-91;-89;" +
           "-100;0'rxrate'=#{h['wlanRxRate']};30;10;0;270'txrate'=#{h['wlanTxRate']}" +
           ";30;10;0;270'ccq'=#{ccq h['ccq']}%;90;85;;'wcon'=#{h['wlanConnections']};20" +
           ";25;0;50'lavg'=#{h['loadavg']};5;10;0;30'uptime'=#{h['uptime']};300;100;0;1000"
