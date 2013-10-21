@@ -107,14 +107,16 @@ class UBNT2NAG
         self.send(cmd)
         exit 0
       rescue Errno::ETIMEDOUT => e
-        puts "CRITICAL| #{e.class} #{e.message}"
+        #puts "CRITICAL - #{e.class} #{e.message}"
+        puts "UBNT ERROR - #{e.class} #{e.message}"
       rescue => e
-        puts "WARNING| #{e.class} #{e.message}"
+        #puts "WARNING - #{e.class} #{e.message}"
+        puts "UBNT ERROR - #{e.class} #{e.message}"
       end
     else
       puts opts.help
     end
-    exit 1
+    exit 3
   end
 
 end
