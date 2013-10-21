@@ -97,13 +97,13 @@ class UBNT2NAG
         h[key] = value
       end
     end
-    puts "UBNT OK: #{p h['deviceName']}, #{p h['deviceId']}, #{p h['essid']}," +
+    puts "OK: #{p h['deviceName']}, #{p h['deviceId']}, #{p h['essid']}," +
           " #{p h['freq']}, #{p h['platform']}, #{p h['lanSpeed']}, 0d:0h:1m, #{p h['firmwareVersion']} |" +
-          " 'rxdata'=#{p h['wlanRxBytes']}c;;;;'txdata'=#{h['wlanTxBytes']}c;;;;" +
-          "'signal'=#{p h['signal']};-78;-83;-100;0'noise'=#{h['noise']};-91;-89;" +
-          "-100;0'rxrate'=#{h['wlanRxRate']};30;10;0;270'txrate'=#{h['wlanTxRate']}" +
-          ";30;10;0;270'ccq'=#{ccq h['ccq']}%;90;85;;'wcon'=#{h['wlanConnections']};20" +
-          ";25;0;50'lavg'=#{h['loadavg']};5;10;0;30'uptime'=#{h['uptime']};300;100;0;1000"
+          " 'rxdata'=#{p h['wlanRxBytes']}c;;;;'txdata'=#{p h['wlanTxBytes']}c;;;;" +
+          "'signal'=#{p h['signal']};-78;-83;-100;0'noise'=#{p h['noise']};-91;-89;" +
+          "-100;0'rxrate'=#{p h['wlanRxRate']};30;10;0;270'txrate'=#{p h['wlanTxRate']}" +
+          ";30;10;0;270'ccq'=#{ccq h['ccq']}%;90;85;;'wcon'=#{p h['wlanConnections']};20" +
+          ";25;0;50'lavg'=#{p h['loadavg']};5;10;0;30'uptime'=#{p h['uptime']};300;100;0;1000"
   end
 
   def run
@@ -113,16 +113,14 @@ class UBNT2NAG
         self.send(cmd)
         exit 0
       rescue Errno::ETIMEDOUT => e
-        #puts "CRITICAL - #{e.class} #{e.message}"
-        puts "UBNT ERROR - #{e.class} #{e.message}"
+        puts "CRITICAL - #{e.class} #{e.message}"
       rescue => e
-        #puts "WARNING - #{e.class} #{e.message}"
-        puts "UBNT ERROR - #{e.class} #{e.message}"
+        puts "WARNING - #{e.class} #{e.message}"
       end
     else
       puts opts.help
     end
-    exit 3
+    exit 2
   end
 
 end
