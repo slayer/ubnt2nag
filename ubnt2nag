@@ -120,7 +120,7 @@ class UBNT2NAG
     else
       puts opts.help
     end
-    exit 2
+    exit 1
   end
 
 end
