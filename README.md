@@ -51,6 +51,9 @@ Usage
 
 	ubnt2nag -h [user@]host[:port] -u user [-p password] -k ssh_key_file [-v] command
 
+	send_sms_life.rb
+	check_ruby_df.rb
+
 
 Example Nagios config
 =====================
